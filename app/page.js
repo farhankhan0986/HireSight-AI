@@ -963,7 +963,7 @@ export default function Home() {
                 </div>
                 <div className="text-left">
                   <p className="text-sm font-bold text-foreground">
-                    Can't find your domain?
+                    Cant find your domain?
                   </p>
                   <p className="text-xs text-foreground/60">
                     Browse all 50+ job categories
@@ -1441,7 +1441,7 @@ export default function Home() {
       transition={{ delay: 0.2 }}
       className="text-base md:text-lg text-foreground/70 mb-10 max-w-2xl mx-auto"
     >
-      Join thousands of professionals who've found their dream roles through AI-powered matching and verified opportunities
+      Join thousands of professionals who have found their dream roles through AI-powered matching and verified opportunities
     </motion.p>
 
     {/* CTA Buttons */}
