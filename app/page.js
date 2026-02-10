@@ -963,7 +963,7 @@ export default function Home() {
                 </div>
                 <div className="text-left">
                   <p className="text-sm font-bold text-foreground">
-                    Can't find your domain?
+                    Can&apos;t find your domain?
                   </p>
                   <p className="text-xs text-foreground/60">
                     Browse all 50+ job categories
