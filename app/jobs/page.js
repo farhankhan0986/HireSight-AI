@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -11,58 +12,62 @@ export default function JobsPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [initialized, setInitialized] = useState(false);
 
-  useEffect(() => {
-    const loadUser = async () => {
-      try {
-        const res = await fetch("/api/auth/me", {
-          credentials: "include",
-        });
-        const data = await res.json();
-        if (data.loggedIn) setUser(data);
-      } catch {}
-    };
 
-    loadUser();
 
-    const checkAuth = async () => {
-      try {
-        const res = await fetch("/api/auth/me", {
-          credentials: "include",
-        });
-        const data = await res.json();
-        setLoggedIn(data.loggedIn);
-      } catch {
-        setLoggedIn(false);
-      }
-    };
+  const loadUser = async () => {
+  try {
+    const res = await fetch("/api/auth/me", {
+      credentials: "include",
+    });
+    const data = await res.json();
+    if (data.loggedIn) setUser(data);
+  } catch {}
+};
 
-    checkAuth();
-  }, []);
+const checkAuth = async () => {
+  try {
+    const res = await fetch("/api/auth/me", {
+      credentials: "include",
+    });
+    const data = await res.json();
+    setLoggedIn(data.loggedIn);
+  } catch {
+    setLoggedIn(false);
+  }
+};
 
-  useEffect(() => {
-    fetchJobs();
-  }, [page]);
+  if (!initialized) {
+  setInitialized(true);
+  loadUser();
+  checkAuth();
+}
 
-  const fetchJobs = async () => {
-    try {
-      setLoading(true);
-      const res = await fetch(`/api/jobs?page=${page}&limit=10`);
-      const data = await res.json();
+  const fetchJobs = useCallback(async () => {
+  try {
+    setLoading(true);
+    const res = await fetch(`/api/jobs?page=${page}&limit=10`);
+    const data = await res.json();
 
-      if (!res.ok) {
-        setError("Failed to load jobs");
-        return;
-      }
-
-      setJobs(data.jobs);
-      setTotalPages(data.totalPages);
-    } catch {
-      setError("Something went wrong");
-    } finally {
-      setLoading(false);
+    if (!res.ok) {
+      setError("Failed to load jobs");
+      return;
     }
-  };
+
+    setJobs(data.jobs);
+    setTotalPages(data.totalPages);
+  } catch {
+    setError("Something went wrong");
+  } finally {
+    setLoading(false);
+  }
+}, [page]);
+useEffect(() => {
+  fetchJobs();
+}, [fetchJobs]);
+
+
 
   const applyToJob = async (jobId) => {
     const res = await fetch("/api/applications", {
