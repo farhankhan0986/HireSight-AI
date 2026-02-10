@@ -43,9 +43,9 @@ export default function SettingsPage() {
     }
   };
  useEffect(() => {
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   loadUser();
 }, []);
-
   const handleInputChange = (field) => (e) => {
     setFormData({ ...formData, [field]: e.target.value });
   };
