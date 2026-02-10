@@ -74,7 +74,7 @@ export default function SkillsSalaryChart() {
           custom={1}
           className="text-base md:text-lg text-foreground/70 max-w-2xl mx-auto"
         >
-          Understand how in-demand skills directly impact compensation in today's job market
+          Understand how in-demand skills directly impact compensation in today&apos;s job market
         </motion.p>
       </div>
 

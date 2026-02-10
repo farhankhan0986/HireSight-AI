@@ -7,6 +7,7 @@ import Link from "next/link";
 export default function SettingsPage() {
   const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState("profile");
+  const [initialized, setInitialized] = useState(false);
   const [saving, setSaving] = useState(false);
   
   // Form states
@@ -41,11 +42,10 @@ export default function SettingsPage() {
       });
     }
   };
-
-  useEffect(() => {
-    loadUser();
-  }, []);
-
+  if (!initialized) {
+  setInitialized(true);
+  loadUser();
+}
   const handleInputChange = (field) => (e) => {
     setFormData({ ...formData, [field]: e.target.value });
   };

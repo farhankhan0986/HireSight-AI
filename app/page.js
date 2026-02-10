@@ -1441,7 +1441,7 @@ export default function Home() {
       transition={{ delay: 0.2 }}
       className="text-base md:text-lg text-foreground/70 mb-10 max-w-2xl mx-auto"
     >
-      Join thousands of professionals who've found their dream roles through AI-powered matching and verified opportunities
+      Join thousands of professionals who&apos;ve found their dream roles through AI-powered matching and verified opportunities
     </motion.p>
 
     {/* CTA Buttons */}

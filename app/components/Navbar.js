@@ -13,6 +13,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const [lastPath, setLastPath] = useState(pathname);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -43,9 +44,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
+  if (pathname !== lastPath) {
+  setLastPath(pathname);
+  setMobileMenuOpen(false);
+}
+
 
   if (
     pathname === "/login" ||
