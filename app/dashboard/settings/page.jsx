@@ -42,10 +42,10 @@ export default function SettingsPage() {
       });
     }
   };
-  if (!initialized) {
-  setInitialized(true);
+ useEffect(() => {
   loadUser();
-}
+}, []);
+
   const handleInputChange = (field) => (e) => {
     setFormData({ ...formData, [field]: e.target.value });
   };
