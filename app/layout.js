@@ -4,6 +4,9 @@ import Navbar from "./components/Navbar";
 export const metadata = {
   title: "HireSight AI",
   description: "AI-powered hiring platform",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({ children }) {
