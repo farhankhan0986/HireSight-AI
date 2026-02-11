@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
 export default function RecruiterDashboard() {
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [jobs, setJobs] = useState([]);
   const [applications, setApplications] = useState([]);
@@ -419,7 +421,7 @@ export default function RecruiterDashboard() {
               </div>
               {applications.length > 10 && (
                 <div className="p-4 border-t border-border text-center">
-                  <button className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors">
+                  <button onClick={()=>router.push("recruiter/applications")} className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors">
                     View All {applications.length} Applications →
                   </button>
                 </div>
