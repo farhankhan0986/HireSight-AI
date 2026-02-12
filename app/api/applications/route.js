@@ -76,13 +76,29 @@ export async function POST(req) {
 export async function GET(req) {
   await connectDB();
 
-  const email = req.nextUrl.searchParams.get("email");
   const token = req.cookies.get("token")?.value;
 
-  // 🔹 Candidate: own applications
-  if (email) {
+  if (!token) {
+    return NextResponse.json(
+      { error: "Unauthorized" },
+      { status: 401 }
+    );
+  }
+
+  let payload;
+  try {
+    payload = jwt.verify(token, process.env.JWT_SECRET);
+  } catch {
+    return NextResponse.json(
+      { error: "Invalid token" },
+      { status: 401 }
+    );
+  }
+
+  // 🔹 Candidate: get own applications
+  if (payload.role === "candidate") {
     const apps = await Application.find({
-      applicantEmail: email,
+      applicantEmail: payload.email,
     })
       .populate("job")
       .sort({ createdAt: -1 });
@@ -90,30 +106,21 @@ export async function GET(req) {
     return NextResponse.json(apps);
   }
 
-  // 🔹 Recruiter: applications for their jobs
-  if (token) {
-    let payload;
-    try {
-      payload = jwt.verify(token, process.env.JWT_SECRET);
-    } catch {
-      return NextResponse.json([]);
-    }
+  // 🔹 Recruiter: get applications for their jobs
+  if (payload.role === "recruiter") {
+    const jobs = await Job.find({
+      createdBy: payload.userId,
+    }).select("_id");
 
-    if (payload.role === "recruiter") {
-      const jobs = await Job.find({
-        createdBy: payload.userId,
-      }).select("_id");
+    const jobIds = jobs.map((j) => j._id);
 
-      const jobIds = jobs.map((j) => j._id);
+    const apps = await Application.find({
+      job: { $in: jobIds },
+    })
+      .populate("job")
+      .sort({ createdAt: -1 });
 
-      const apps = await Application.find({
-        job: { $in: jobIds },
-      })
-        .populate("job")
-        .sort({ createdAt: -1 });
-
-      return NextResponse.json(apps);
-    }
+    return NextResponse.json(apps);
   }
 
   return NextResponse.json([]);
