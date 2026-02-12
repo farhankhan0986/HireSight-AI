@@ -36,10 +36,13 @@ export default function LoginPage() {
         return;
       }
 
-      router.refresh();
-      router.push(
-        data.role === "recruiter" ? "/dashboard/recruiter" : "/dashboard"
-      );
+      // ✅ FIX: Use window.location.href instead of router.push()
+      // This forces a full page reload, ensuring the cookie is available on the server
+      window.location.href = data.role === "recruiter" 
+        ? "/dashboard/recruiter" 
+        : "/dashboard";
+      
+      // Note: Don't set loading to false here - page will reload anyway
     } catch (err) {
       setError("Something went wrong. Please try again.");
       setLoading(false);
