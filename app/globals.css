@@ -15,6 +15,30 @@
   --border: #e5e7eb;
 }
 
+/* Dark mode using class */
+.dark {
+  --background: #020617;       /* Midnight */
+  --foreground: #e5e7eb;       /* Soft white */
+
+  --primary: #38bdf8;          /* Cyan pops in dark */
+  --primary-accent: #22d3ee;
+
+  --card: #0f172a;
+  --border: #1e293b;
+}
+
+/* Optional: Keep media query as fallback */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background: #020617;
+    --foreground: #e5e7eb;
+    --primary: #38bdf8;
+    --primary-accent: #22d3ee;
+    --card: #0f172a;
+    --border: #1e293b;
+  }
+}
+
 /* ======================
    TAILWIND THEME MAPPING
    ====================== */
@@ -33,30 +57,14 @@
 }
 
 /* ======================
-   DARK MODE (AI PREMIUM)
-   ====================== */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617;       /* Midnight */
-    --foreground: #e5e7eb;       /* Soft white */
-
-    --primary: #38bdf8;          /* Cyan pops in dark */
-    --primary-accent: #22d3ee;
-
-    --card: #0f172a;
-    --border: #1e293b;
-  }
-}
-
-/* ======================
    GLOBAL STYLES
    ====================== */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 
 @keyframes scroll {
   0% {
@@ -70,11 +78,13 @@ body {
 .animate-scroll {
   animation: scroll 30s linear infinite;
 }
+
 .scroll-container {
   overflow: hidden;
   position: relative;
   width: 100%;
 }
+
 @keyframes float {
   0%, 100% {
     transform: translateY(0) translateX(0);

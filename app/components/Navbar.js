@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { ThemeToggle } from "../components/theme-toggle";
 
 export default function Navbar() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -153,6 +154,8 @@ export default function Navbar() {
               </Link>
             ))}
 
+            <ThemeToggle />
+
             {loggedIn ? (
               <div className="flex items-center gap-2 ml-2">
                 {/* User Info */}
@@ -171,6 +174,8 @@ export default function Navbar() {
                     </p>
                   </div>
                 </div>
+
+                
 
                 {/* Logout Button */}
                 <button
@@ -217,11 +222,15 @@ export default function Navbar() {
               )}
             </svg>
           </button>
+          
         </div>
+        
 
         {/* Mobile Menu */}
         <AnimatePresence>
+          
           {mobileMenuOpen && (
+            
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
@@ -229,8 +238,11 @@ export default function Navbar() {
               transition={{ duration: 0.2 }}
               className="md:hidden overflow-hidden border-t border-border"
             >
+              
+
               <div className="py-4 space-y-2">
                 {/* User Info Mobile */}
+                
                 {loggedIn && userName && (
                   <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-foreground/5 mb-4">
                     <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center">
@@ -246,8 +258,14 @@ export default function Navbar() {
                         {role || "user"}
                       </p>
                     </div>
+                    
                   </div>
                 )}
+                 {/* Theme Toggle Section */}
+        <div className="flex items-center justify-between px-4 py-3 rounded-lg bg-foreground/5 mb-4">
+          <span className="text-sm font-semibold text-foreground">Theme</span>
+          <ThemeToggle />
+        </div>
 
                 {/* Navigation Links */}
                 {navLinks.map((link) => (
