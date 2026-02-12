@@ -5,17 +5,20 @@ import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, systemTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!mounted) {
     return (
-      <div className="w-10 h-10 rounded-lg border border-border bg-background animate-pulse" />
+      <div className="w-10 h-10 rounded-lg border border-border bg-card" />
     );
   }
+
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   return (
     <button
@@ -23,10 +26,9 @@ export function ThemeToggle() {
       className="relative w-10 h-10 rounded-lg border border-border hover:border-primary/30 hover:bg-foreground/5 transition-all flex items-center justify-center group"
       aria-label="Toggle theme"
     >
-      {/* Sun Icon (Light Mode) */}
       <svg
         className={`w-5 h-5 absolute transition-all duration-300 ${
-          theme === "dark"
+          currentTheme === "dark"
             ? "rotate-90 scale-0 opacity-0"
             : "rotate-0 scale-100 opacity-100"
         }`}
@@ -42,10 +44,9 @@ export function ThemeToggle() {
         />
       </svg>
 
-      {/* Moon Icon (Dark Mode) */}
       <svg
         className={`w-5 h-5 absolute transition-all duration-300 ${
-          theme === "dark"
+          currentTheme === "dark"
             ? "rotate-0 scale-100 opacity-100"
             : "-rotate-90 scale-0 opacity-0"
         }`}
