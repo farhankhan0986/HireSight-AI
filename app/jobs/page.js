@@ -155,7 +155,7 @@ useEffect(() => {
           <p className="text-foreground/60 mb-6">{error}</p>
           <button
             onClick={fetchJobs}
-            className="px-6 py-2.5 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-all"
+            className="px-6 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all"
           >
             Try Again
           </button>
@@ -202,7 +202,7 @@ useEffect(() => {
             <p className="text-foreground/60 mb-6">Check back later for new opportunities</p>
             <Link
               href="/"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-all"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -317,7 +317,7 @@ useEffect(() => {
                         {!user ? (
                           <Link
                             href="/login"
-                            className="px-5 py-2 rounded-lg text-sm font-bold bg-gradient-to-r from-primary to-primary/90 text-white hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center gap-1.5"
+                            className="px-5 py-2 rounded-lg text-sm font-bold bg-gradient-to-r from-primary to-primary/90 text-primary-foreground hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center gap-1.5"
                           >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -327,7 +327,7 @@ useEffect(() => {
                         ) : !user.resume ? (
                           <Link
                             href="/dashboard/settings"
-                            className="px-5 py-2 rounded-lg text-sm font-bold bg-yellow-500 text-white hover:bg-yellow-600 transition-all flex items-center gap-1.5"
+                            className="px-5 py-2 rounded-lg text-sm font-bold bg-yellow-500 text-primary-foreground hover:bg-yellow-600 transition-all flex items-center gap-1.5"
                           >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -337,7 +337,7 @@ useEffect(() => {
                         ) : (
                           <button
                             onClick={() => applyToJob(job._id)}
-                            className="px-5 py-2 rounded-lg text-sm font-bold bg-gradient-to-r from-primary to-primary/90 text-white hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center gap-1.5"
+                            className="px-5 py-2 rounded-lg text-sm font-bold bg-gradient-to-r from-primary to-primary/90 text-primary-foreground hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center gap-1.5"
                           >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -394,7 +394,7 @@ useEffect(() => {
                         className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all
                           ${
                             page === pageNum
-                              ? "bg-primary text-white shadow-lg shadow-primary/25"
+                              ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
                               : "border border-border hover:bg-primary/10 hover:border-primary/30"
                           }`}
                       >

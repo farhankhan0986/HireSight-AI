@@ -19,10 +19,22 @@ const ApplicationSchema = new mongoose.Schema(
       default: "",
     },
     aiParsingStatus: {
-  type: String,
-  enum: ["pending", "parsed", "failed"],
-  default: "pending"
-},
+      type: String,
+      enum: ["pending", "parsed", "failed"],
+      default: "pending"
+    },
+    ai_score: {
+      type: Number,
+      default: null,
+    },
+    ai_analysis: {
+      type: Object,
+      default: null, // expecting { strengths: [], missing_skills: [], suggestions: "" }
+    },
+    rank: {
+      type: Number,
+      default: null,
+    },
     status: {
       type: String,
       enum: ["Applied", "Under Review", "Accepted", "Rejected"],

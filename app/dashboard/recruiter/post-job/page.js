@@ -317,7 +317,7 @@ export default function PostJobPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 py-3.5 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-white font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+                  className="flex-1 py-3.5 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
                 >
                   {loading ? (
                     <>

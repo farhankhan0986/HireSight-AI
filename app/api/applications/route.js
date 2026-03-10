@@ -4,8 +4,8 @@ import Application from "../../../models/Application";
 import Job from "../../../models/Job";
 import User from "../../../models/User";
 import jwt from "jsonwebtoken";
-// import { fetchPdfBuffer } from "../../../lib/ai/fetchPdfBuffer";
-// import { extractResumeText } from "../../../lib/ai/extractResumeText";
+import { fetchPdfBuffer } from "../../../lib/ai/fetchPdfBuffer";
+import { extractResumeText } from "../../../lib/ai/extractResumeText";
 
 export const runtime = "nodejs";
 /* =======================
@@ -43,9 +43,6 @@ export async function POST(req) {
   }
   // console.log("User resume object:", user.resume);
 
-  
-  // const resumeBuffer = await fetchPdfBuffer(user.resume);
-  // const resumeText = await extractResumeText(resumeBuffer);
   const exists = await Application.findOne({
     job: jobId,
     applicantEmail: user.email,
@@ -58,12 +55,25 @@ export async function POST(req) {
     );
   }
 
+  // 1. Fetch resume PDF & Extract text
+  let resumeText = "";
+  let aiParsingStatus = "failed";
+  try {
+    const resumeBuffer = await fetchPdfBuffer(user.resume);
+    resumeText = await extractResumeText(resumeBuffer);
+    if (resumeText && resumeText.length > 50) {
+      aiParsingStatus = "parsed";
+    }
+  } catch (err) {
+    console.error("Failed to parse resume text during app submission:", err);
+  }
+
   const application = await Application.create({
     job: jobId,
     applicantEmail: user.email,
-    resumeLink: user.resume, // ✅ stored ONCE
-    // resumeText, // ✅ NEW: extracted text stored
-    // aiParsingStatus: resumeText ? "parsed" : "failed",
+    resumeLink: user.resume, 
+    resumeText, 
+    aiParsingStatus,
     status: "Applied",
   });
 

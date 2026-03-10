@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+const ResumeViewer = dynamic(() => import("@/app/components/ResumeViewer"), { ssr: false });
 
 export default function RecruiterApplicationsPage() {
   const [applications, setApplications] = useState([]);
@@ -9,6 +11,7 @@ export default function RecruiterApplicationsPage() {
   const [error, setError] = useState("");
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [viewingResume, setViewingResume] = useState(null);
 
   useEffect(() => {
     const fetchApplications = async () => {
@@ -58,6 +61,37 @@ export default function RecruiterApplicationsPage() {
       y: 0,
       transition: { delay: i * 0.1, duration: 0.5 },
     }),
+  };
+
+  const handleRankCandidates = async (jobId) => {
+    try {
+      const res = await fetch(`/api/recruiter/rank/${jobId}`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert(data.message || "Successfully ranked candidates.");
+        // Refresh apps
+        const fetchApplications = async () => {
+          try {
+            const res = await fetch("/api/applications", {
+              credentials: "include",
+            });
+            const data = await res.json();
+            if (res.ok) {
+              setApplications(data);
+            }
+          } catch (e) {
+            console.error(e);
+          }
+        };
+        fetchApplications();
+      } else {
+        alert(data.error || "Failed to rank candidates.");
+      }
+    } catch (err) {
+      alert("Something went wrong");
+    }
   };
 
   // Filter applications
@@ -130,7 +164,7 @@ export default function RecruiterApplicationsPage() {
           <p className="text-foreground/60 mb-6">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-6 py-2.5 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-all"
+            className="px-6 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all"
           >
             Try Again
           </button>
@@ -172,7 +206,7 @@ export default function RecruiterApplicationsPage() {
             </Link>
             <Link
               href="/dashboard/recruiter/post-job"
-              className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-primary to-primary/90 text-white font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center gap-2"
+              className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center gap-2"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -229,7 +263,7 @@ export default function RecruiterApplicationsPage() {
                 onClick={() => setFilter(status)}
                 className={`px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap transition-all ${
                   filter === status
-                    ? "bg-primary text-white shadow-lg shadow-primary/25"
+                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
                     : "bg-card border border-border hover:border-primary/30 text-foreground/70"
                 }`}
               >
@@ -275,7 +309,15 @@ export default function RecruiterApplicationsPage() {
           </motion.div>
         ) : (
           <div className="grid gap-4">
-            {filteredApplications.map((app, index) => (
+            {filteredApplications
+              // Sort by rank, but keep unranked ones at the bottom
+              .sort((a, b) => {
+                if (a.rank && !b.rank) return -1;
+                if (!a.rank && b.rank) return 1;
+                if (a.rank && b.rank) return a.rank - b.rank;
+                return new Date(b.createdAt) - new Date(a.createdAt);
+              })
+              .map((app, index) => (
               <motion.div
                 key={app._id}
                 initial={{ opacity: 0, y: 20 }}
@@ -296,8 +338,19 @@ export default function RecruiterApplicationsPage() {
 
                       {/* Details */}
                       <div className="flex-1 min-w-0">
-                        <h2 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors mb-1 truncate">
+                        <h2 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors mb-1 truncate flex items-center gap-3">
                           {app.job?.title || "Job removed"}
+                          {app.ai_score !== undefined && app.ai_score !== null && (
+                            <span className={`px-2.5 py-1 rounded-md text-xs font-bold border ${
+                              app.ai_score >= 80 
+                                ? 'bg-green-500/10 text-green-500 border-green-500/20' 
+                                : app.ai_score >= 60 
+                                ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20' 
+                                : 'bg-red-500/10 text-red-500 border-red-500/20'
+                            }`}>
+                              {app.ai_score}% Match {app.rank ? `(#${app.rank})` : ''}
+                            </span>
+                          )}
                         </h2>
                         
                         <div className="flex flex-wrap items-center gap-3 text-sm text-foreground/60 mb-3">
@@ -329,10 +382,11 @@ export default function RecruiterApplicationsPage() {
 
                         {/* Resume Link */}
                         {app.resumeLink && (
-                          <a
-                            href={app.resumeLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setViewingResume(app.resumeLink);
+                            }}
                             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary text-sm font-semibold transition-all"
                           >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -340,8 +394,18 @@ export default function RecruiterApplicationsPage() {
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
                             View Resume
-                          </a>
+                          </button>
                         )}
+                            <button
+                              onClick={() => handleRankCandidates(app.job?._id)}
+                              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-500 text-sm font-semibold transition-all"
+                              title="Rank Candidates for this Job"
+                            >
+                              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                              </svg>
+                              Rank Candidates
+                            </button>
                       </div>
                     </div>
                   </div>
@@ -385,6 +449,10 @@ export default function RecruiterApplicationsPage() {
           </motion.p>
         )}
       </div>
+
+      {viewingResume && (
+        <ResumeViewer url={viewingResume} onClose={() => setViewingResume(null)} />
+      )}
     </div>
   );
 }

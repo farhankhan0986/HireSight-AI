@@ -1,0 +1,43 @@
+
+> hiresight-ai@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.9
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./app/components/ResumeViewer.jsx
+Module not found: Can't resolve 'react-pdf/dist/esm/Page/AnnotationLayer.css'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/dashboard/settings/page.jsx
+
+./app/components/ResumeViewer.jsx
+Module not found: Can't resolve 'react-pdf/dist/esm/Page/TextLayer.css'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/dashboard/settings/page.jsx
+
+./app/api/candidate/analyze-resume/route.js
+Module not found: Can't resolve '../../../lib/db'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/api/candidate/analyze-resume/route.js
+Module not found: Can't resolve '../../../models/User'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/api/candidate/analyze-resume/route.js
+Module not found: Can't resolve '../../../lib/ai/fetchPdfBuffer'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors

@@ -13,12 +13,12 @@ import {
 } from "recharts";
 
 const data = [
-  { skill: "HTML/CSS", salary: 6, color: "#60a5fa", trend: "+12%" },
-  { skill: "React", salary: 10, color: "#3b82f6", trend: "+18%" },
-  { skill: "Node.js", salary: 12, color: "#2563eb", trend: "+15%" },
-  { skill: "Full Stack", salary: 15, color: "#1d4ed8", trend: "+22%" },
-  { skill: "Data Science", salary: 18, color: "#1e40af", trend: "+28%" },
-  { skill: "AI / ML", salary: 25, color: "#1e3a8a", trend: "+45%" },
+  { skill: "HTML/CSS", salary: 5, color: "#64748b", trend: "Stable" },
+  { skill: "React / Node", salary: 12, color: "#3b82f6", trend: "+12%" },
+  { skill: "Python / Data", salary: 15, color: "#10b981", trend: "+25%" },
+  { skill: "Cloud / DevOps", salary: 18, color: "#6366f1", trend: "+30%" },
+  { skill: "Cybersecurity", salary: 20, color: "#ec4899", trend: "+35%" },
+  { skill: "AI / ML", salary: 28, color: "#8b5cf6", trend: "+45%" },
 ];
 
 const fadeUp = {
@@ -99,7 +99,7 @@ export default function SkillsSalaryChart() {
             <div className="flex items-center justify-between mb-6 pb-4 border-b border-border/50">
               <div>
                 <h3 className="text-base font-bold text-foreground mb-1">Average Compensation by Skill</h3>
-                <p className="text-xs text-foreground/60">Based on 50,000+ job postings • Updated daily</p>
+                <p className="text-xs text-foreground/60">Based on global tech market analysis in LPA (₹)</p>
               </div>
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/10 border border-primary/20">
                 <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
@@ -218,7 +218,7 @@ export default function SkillsSalaryChart() {
             ),
             label: "Highest Growth",
             value: "AI / ML",
-            subtext: "+45% YoY",
+            subtext: "Surging Demand",
             color: "text-green-500"
           },
           {
@@ -227,9 +227,9 @@ export default function SkillsSalaryChart() {
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
               </svg>
             ),
-            label: "Most Hired",
-            value: "Full Stack",
-            subtext: "3.2k openings",
+            label: "Most Required",
+            value: "Cloud & Data",
+            subtext: "Platform Fundamentals",
             color: "text-blue-500"
           },
           {
@@ -238,9 +238,9 @@ export default function SkillsSalaryChart() {
                 <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clipRule="evenodd" />
               </svg>
             ),
-            label: "Top Salary",
-            value: "₹25 LPA",
-            subtext: "AI / ML avg",
+            label: "Top Salary Sector",
+            value: "₹28+ LPA",
+            subtext: "AI / ML Avg",
             color: "text-primary"
           },
         ].map((stat, i) => (

@@ -129,7 +129,7 @@ export default function JobDetailsPage({ params }) {
           <p className="text-foreground/60 mb-6">{error}</p>
           <Link
             href="/jobs"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-all"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -297,7 +297,7 @@ export default function JobDetailsPage({ params }) {
               {!user ? (
                 <Link
                   href="/login"
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-white font-bold hover:shadow-lg hover:shadow-primary/25 transition-all mb-3"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold hover:shadow-lg hover:shadow-primary/25 transition-all mb-3"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -307,7 +307,7 @@ export default function JobDetailsPage({ params }) {
               ) : !user.resume ? (
                 <Link
                   href="/dashboard/settings"
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-yellow-500 text-white font-bold hover:bg-yellow-600 transition-all mb-3"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-yellow-500 text-primary-foreground font-bold hover:bg-yellow-600 transition-all mb-3"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -318,7 +318,7 @@ export default function JobDetailsPage({ params }) {
                 <button
                   onClick={handleApply}
                   disabled={applying}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-white font-bold hover:shadow-lg hover:shadow-primary/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed mb-3"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold hover:shadow-lg hover:shadow-primary/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed mb-3"
                 >
                   {applying ? (
                     <>

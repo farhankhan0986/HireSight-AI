@@ -17,7 +17,7 @@ export async function GET(req) {
 
     // Fetch user from DB
     const user = await User.findById(decoded.userId).select(
-      "name email role resume"
+      "name email role resume extracted_skills domain_scores"
     );
 
     if (!user) {
@@ -31,6 +31,8 @@ export async function GET(req) {
       email: user.email,
       role: user.role,
       resume: user.resume || null, 
+      extracted_skills: user.extracted_skills || [],
+      domain_scores: user.domain_scores || {},
     });
   } catch (err) {
     return NextResponse.json({ loggedIn: false });

@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+const ResumeViewer = dynamic(() => import("@/app/components/ResumeViewer"), { ssr: false });
 
 export default function SettingsPage() {
   const [user, setUser] = useState(null);
@@ -533,6 +535,7 @@ function ResumeUpload({ currentResume, onUploaded }) {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [dragActive, setDragActive] = useState(false);
+  const [viewingResume, setViewingResume] = useState(false);
 
   const uploadResume = async () => {
     if (!file) return;
@@ -593,10 +596,9 @@ function ResumeUpload({ currentResume, onUploaded }) {
               <p className="text-xs text-green-600/70">Your resume is active and visible to recruiters</p>
             </div>
           </div>
-          <a
-            href={currentResume}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={() => setViewingResume(true)}
             className="px-4 py-2 rounded-lg bg-green-500/20 hover:bg-green-500/30 text-green-600 text-sm font-semibold transition-all flex items-center gap-2"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -604,7 +606,7 @@ function ResumeUpload({ currentResume, onUploaded }) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
             </svg>
             View Resume
-          </a>
+          </button>
         </div>
       )}
 
@@ -687,7 +689,7 @@ function ResumeUpload({ currentResume, onUploaded }) {
           type="button"
           onClick={uploadResume}
           disabled={loading || !file}
-          className="px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-white font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          className="px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
         >
           {loading ? (
             <>
@@ -716,6 +718,10 @@ function ResumeUpload({ currentResume, onUploaded }) {
           </button>
         )}
       </div>
+
+      {viewingResume && currentResume && (
+        <ResumeViewer url={currentResume} onClose={() => setViewingResume(false)} />
+      )}
     </div>
   );
 }

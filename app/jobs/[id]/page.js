@@ -105,7 +105,7 @@ export default function JobDetailsPage({ params }) {
 
           <button
             onClick={handleApply}
-            className="px-5 py-2 rounded-xl bg-primary text-white"
+            className="px-5 py-2 rounded-xl bg-primary text-primary-foreground"
           >
             Apply
           </button>

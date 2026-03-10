@@ -1,0 +1,20 @@
+
+> hiresight-ai@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.9
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 5.4s
+   Linting and checking validity of types ...
+
+Failed to compile.
+
+./app/components/theme-toggle.jsx
+12:5  Warning: Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps').
+
+./app/dashboard/candidate/resume-analyzer/page.js
+225:70  Error: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules

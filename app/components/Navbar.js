@@ -122,18 +122,10 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 group"
+            className="flex flex-col justify-center group"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-lg shadow-primary/25 group-hover:scale-110 transition-transform duration-300">
-              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-              </svg>
-            </div>
-            <span className="text-xl font-bold tracking-tight">
-              <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                HireSight
-              </span>
-              <span className="text-foreground">AI</span>
+            <span className="text-xl font-black tracking-tighter text-foreground leading-none">
+              HireSight<span className="text-foreground/30">.</span>
             </span>
           </Link>
 
@@ -198,7 +190,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   href="/login"
-                  className="px-4 py-2 rounded-lg bg-gradient-to-r from-primary to-primary/90 text-white hover:shadow-lg hover:shadow-primary/25 transition-all font-semibold text-sm flex items-center gap-2"
+                  className="px-5 py-2 rounded-md bg-foreground text-background hover:bg-foreground/90 transition-all font-semibold text-sm flex items-center gap-2 shadow-sm"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />

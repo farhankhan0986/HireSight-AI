@@ -11,6 +11,17 @@ const UserSchema = new mongoose.Schema(
       default: "candidate",
     },
     resume: String,
+    
+    // AI Resume Intelligence Fields
+    extracted_skills: {
+      type: [String],
+      default: [],
+    },
+    domain_scores: {
+      type: Map,
+      of: Object, 
+      default: {},
+    },
   },
   { timestamps: true }
 );

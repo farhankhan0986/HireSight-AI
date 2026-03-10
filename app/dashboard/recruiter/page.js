@@ -4,6 +4,8 @@ import { useEffect, useState} from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+const ResumeViewer = dynamic(() => import("@/app/components/ResumeViewer"), { ssr: false });
 
 export default function RecruiterDashboard() {
   const router = useRouter();
@@ -18,6 +20,8 @@ export default function RecruiterDashboard() {
     rejected: 0,
   });
   const [loading, setLoading] = useState(true);
+  const [viewingResume, setViewingResume] = useState(null);
+  const [rankingJob, setRankingJob] = useState(null);
 
   useEffect(() => {
     const loadDashboard = async () => {
@@ -84,6 +88,29 @@ export default function RecruiterDashboard() {
       y: 0,
       transition: { delay: i * 0.1, duration: 0.5 },
     }),
+  };
+
+  const handleRankCandidates = async (jobId) => {
+    setRankingJob(jobId);
+    try {
+      const res = await fetch(`/api/recruiter/rank/${jobId}`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert(data.message || "Successfully ranked candidates.");
+        // Refresh apps
+        const appsRes = await fetch("/api/applications", { credentials: "include" });
+        const appsData = await appsRes.json();
+        setApplications(appsData || []);
+      } else {
+        alert(data.error || "Failed to rank candidates.");
+      }
+    } catch (err) {
+      alert("Something went wrong");
+    } finally {
+      setRankingJob(null);
+    }
   };
 
   /* ---------------- LOADING ---------------- */
@@ -163,7 +190,7 @@ export default function RecruiterDashboard() {
           <div className="flex gap-3">
             <Link
               href="/dashboard/recruiter/post-job"
-              className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-primary to-primary/90 text-white font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center gap-2"
+              className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center gap-2"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -287,6 +314,23 @@ export default function RecruiterDashboard() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                               </svg>
                             </button>
+                            <button
+                              onClick={() => handleRankCandidates(job._id)}
+                              disabled={rankingJob === job._id}
+                              className="p-2 rounded-lg hover:bg-foreground/10 transition-colors group disabled:opacity-50"
+                              title="Rank Candidates with AI"
+                            >
+                              {rankingJob === job._id ? (
+                                <svg className="animate-spin w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24">
+                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                              ) : (
+                                <svg className="w-5 h-5 text-foreground/60 group-hover:text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                              )}
+                            </button>
                           </div>
                         </td>
                       </motion.tr>
@@ -316,6 +360,7 @@ export default function RecruiterDashboard() {
                     <tr>
                       <th className="px-6 py-4 text-left font-semibold text-foreground">Candidate</th>
                       <th className="px-6 py-4 text-left font-semibold text-foreground">Job</th>
+                      <th className="px-6 py-4 text-left font-semibold text-foreground">AI Match</th>
                       <th className="px-6 py-4 text-left font-semibold text-foreground">Resume</th>
                       <th className="px-6 py-4 text-left font-semibold text-foreground">Status</th>
                       <th className="px-6 py-4 text-left font-semibold text-foreground">Applied</th>
@@ -348,20 +393,36 @@ export default function RecruiterDashboard() {
                           <p className="text-xs text-foreground/60">{app.job?.company || ""}</p>
                         </td>
                         <td className="px-6 py-4">
+                          {app.ai_score !== undefined && app.ai_score !== null ? (
+                            <div className="flex items-center gap-2">
+                              <span className={`text-sm font-bold ${app.ai_score >= 80 ? 'text-green-500' : app.ai_score >= 60 ? 'text-yellow-500' : 'text-red-500'}`}>
+                                {app.ai_score}%
+                              </span>
+                              {app.rank && (
+                                <span className="px-2 py-0.5 rounded-md bg-foreground/5 text-xs font-semibold text-foreground/70">
+                                  #{app.rank}
+                                </span>
+                              )}
+                            </div>
+                          ) : (
+                            <span className="text-xs text-foreground/50 italic">Not ranked</span>
+                          )}
+                        </td>
+                        <td className="px-6 py-4">
                           {app.resumeLink ? (
-                            <a
-                              href={app.resumeLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setViewingResume(app.resumeLink);
+                              }}
                               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary text-sm font-semibold transition-all"
-                              onClick={(e) => e.stopPropagation()}
                             >
                               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                               </svg>
                               View Resume
-                            </a>
+                            </button>
                           ) : (
                             <span className="text-xs text-foreground/50">Not uploaded</span>
                           )}
@@ -430,6 +491,10 @@ export default function RecruiterDashboard() {
           )}
         </Section>
       </div>
+
+      {viewingResume && (
+        <ResumeViewer url={viewingResume} onClose={() => setViewingResume(null)} />
+      )}
     </div>
   );
 }
