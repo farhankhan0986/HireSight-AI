@@ -18,7 +18,7 @@ export default function Home() {
     <main className="bg-background text-foreground overflow-hidden relative -top-10">
       {/* ================= HERO ================= */}
 
-      <section className="relative min-h-screen flex items-center px-6 md:px-12 py-20 bg-background">
+      <section className="relative min-h-screen flex lg:flex-row flex-col items-center px-6 md:px-12 py-20 bg-background">
         {/* Very faint neutral grid - no glows */}
         <div className="absolute inset-0 -z-10 opacity-[0.03]">
           <div
@@ -124,7 +124,7 @@ export default function Home() {
             custom={3}
             initial="hidden"
             animate="visible"
-            className="relative hidden lg:block order-1 lg:order-2"
+            className="relative lg:block lg:mt-0 mt-10 order-2 lg:order-1"
           >
             <div className="relative rounded-xl border border-primary/20 bg-card/80 backdrop-blur-xl shadow-lg shadow-primary/5 p-6 overflow-hidden">
               {/* Top Accent Line */}
