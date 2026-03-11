@@ -42,7 +42,8 @@ export async function POST(req) {
     const resumeBuffer = await fetchPdfBuffer(user.resume);
     
     // 2. Extract Text via pdftotext or equivalent existing script
-    const resumeText = await extractResumeText(resumeBuffer);
+    let resumeText = await extractResumeText(resumeBuffer);
+    resumeText = resumeText.slice(0, 12000);
     
     if (!resumeText || resumeText.length < 50) {
        return NextResponse.json({ error: "Failed to extract readable text from your resume. Ensure it is a standard text PDF." }, { status: 400 });
