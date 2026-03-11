@@ -488,7 +488,7 @@ function Toggle({ label, defaultChecked = false }) {
         }`}
       >
         <span
-          className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform ${
+          className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-primary-foreground transition-transform ${
             checked ? "translate-x-5" : "translate-x-0"
           }`}
         />
@@ -507,7 +507,7 @@ function PrimaryButton({ label, onClick, disabled }) {
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-white font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+      className="px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
     >
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />

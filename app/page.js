@@ -525,7 +525,9 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <button className="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all hover:scale-105 shadow-lg shadow-primary/25">
+              <button
+                onClick={()=>{window.open("https://www.udemy.com/courses/search/?src=ukw&q=tech","blank")}}
+              className="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all hover:scale-105 shadow-lg shadow-primary/25">
                 Explore Courses
               </button>
             </div>
@@ -857,7 +859,9 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <button className="px-6 py-3 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all hover:scale-105 shadow-lg shadow-primary/25">
+              <button 
+              onClick={()=>{window.open("https://in.indeed.com/career-advice/resumes-cover-letters/in-demand-tech-skills", "_blank")}}
+              className="px-6 py-3 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all hover:scale-105 shadow-lg shadow-primary/25">
                 View All Categories
               </button>
             </div>
@@ -1054,7 +1058,9 @@ export default function Home() {
           <p className="text-xs text-foreground/60">Access comprehensive hiring analytics</p>
         </div>
       </div>
-      <button className="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all hover:scale-105 shadow-lg shadow-primary/25">
+      <button 
+      onClick={()=>{window.open("https://www.techelevator.com/tech-jobs/tech-industry-trends/tech-job-market/", "_blank")}}
+      className="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all hover:scale-105 shadow-lg shadow-primary/25">
         View Full Report
       </button>
     </div>
