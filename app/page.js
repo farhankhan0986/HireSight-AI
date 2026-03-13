@@ -158,7 +158,7 @@ export default function Home() {
                       name: "Aman Verma",
                       role: "Senior Engineer",
                       score: "94",
-                      status: "Verified",
+                      status: "Accepted",
                       color: "from-red-500/20 to-red-500/10",
                       textColor: "text-red-500"
                     },
@@ -205,13 +205,12 @@ export default function Home() {
 
                       <div className="col-span-3 flex justify-end">
                         <span
-                          className={`px-2 py-0.5 text-[9px] rounded-sm font-bold uppercase tracking-wider ${
-                            c.status === "Verified"
+                          className={`px-2 py-0.5 text-[9px] rounded-sm font-bold uppercase tracking-wider ${c.status === "Accepted"
                               ? "bg-emerald-500/15 text-emerald-500 border border-emerald-500/20"
                               : c.status === "Rejected"
-                              ? "bg-red-500/15 text-red-500 border border-red-500/20"
-                              : "bg-blue-500/15 text-blue-500 border border-blue-500/20"
-                          }`}
+                                ? "bg-red-500/15 text-red-500 border border-red-500/20"
+                                : "bg-blue-500/15 text-blue-500 border border-blue-500/20"
+                            }`}
                         >
                           {c.status}
                         </span>
@@ -323,63 +322,64 @@ export default function Home() {
             {[
               {
                 name: "AI & Machine Learning",
-                icon: "🧠",
+                logo: "https://cdn.simpleicons.org/tensorflow",
                 demand: "Critical",
                 growth: "3.5x Faster",
                 color: "from-violet-500/20 to-purple-500/20",
               },
               {
                 name: "Python",
-                icon: "🐍",
+                logo: "https://cdn.simpleicons.org/python",
                 demand: "Very High",
                 growth: "+7.0%",
                 color: "from-blue-500/20 to-cyan-500/20",
               },
               {
                 name: "Cloud Computing",
-                icon: "☁️",
+                logo: "https://cdn.simpleicons.org/googlecloud",
                 demand: "High",
                 growth: "Steady",
                 color: "from-sky-500/20 to-blue-500/20",
               },
               {
                 name: "Cybersecurity",
-                icon: "🛡️",
+                logo: "https://cdn.simpleicons.org/cloudflare",
                 demand: "Critical",
                 growth: "High",
                 color: "from-red-500/20 to-rose-500/20",
               },
               {
                 name: "Data Analytics",
-                icon: "📊",
+                logo: "https://cdn.simpleicons.org/pandas",
                 demand: "Very High",
                 growth: "+52%",
                 color: "from-emerald-500/20 to-green-500/20",
               },
               {
                 name: "Go (Golang)",
-                icon: "🐹",
+                logo: "https://cdn.simpleicons.org/go",
                 demand: "High",
                 growth: "Fast",
                 color: "from-teal-500/20 to-cyan-500/20",
               },
+
               {
                 name: "DevOps & CI/CD",
-                icon: "🔁",
+                logo: "https://cdn.simpleicons.org/docker",
                 demand: "Very High",
                 growth: "High",
                 color: "from-indigo-500/20 to-violet-500/20",
               },
               {
                 name: "UX Design",
-                icon: "🎨",
+                logo: "https://cdn.simpleicons.org/figma",
                 demand: "High",
                 growth: "+14.9%",
                 color: "from-pink-500/20 to-rose-500/20",
               },
               {
                 name: "Full-Stack Dev",
-                icon: "💻",
+                logo: "https://cdn.simpleicons.org/react",
                 demand: "High",
                 growth: "Steady",
                 color: "from-gray-500/20 to-slate-500/20",
@@ -412,7 +412,11 @@ export default function Home() {
                   {/* Icon with animation - REFINED SIZE */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <span className="text-2xl drop-shadow-sm">{skill.icon}</span>
+                      <img
+                        src={skill.logo}
+                        alt={skill.name}
+                        className="w-6 h-6 object-contain group-hover:scale-110 transition-transform duration-300"
+                      />
                     </div>
 
                     {/* Growth indicator - moved to header */}
@@ -442,26 +446,23 @@ export default function Home() {
                   {/* Demand badge - REFINED SIZE */}
                   <div className="flex items-center gap-2 mb-3">
                     <span
-                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-semibold ${
-                        skill.demand === "Very High"
+                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-semibold ${skill.demand === "Very High"
                           ? "bg-primary/15 text-primary border border-primary/20"
                           : "bg-foreground/10 text-foreground/70 border border-foreground/20"
-                      }`}
+                        }`}
                     >
                       <span className="relative flex h-1.5 w-1.5">
                         <span
-                          className={`animate-ping absolute inline-flex h-full w-full rounded-full ${
-                            skill.demand === "Very High"
+                          className={`animate-ping absolute inline-flex h-full w-full rounded-full ${skill.demand === "Very High"
                               ? "bg-primary"
                               : "bg-foreground/50"
-                          } opacity-75`}
+                            } opacity-75`}
                         />
                         <span
-                          className={`relative inline-flex rounded-full h-1.5 w-1.5 ${
-                            skill.demand === "Very High" || skill.demand === "Critical"
+                          className={`relative inline-flex rounded-full h-1.5 w-1.5 ${skill.demand === "Very High" || skill.demand === "Critical"
                               ? "bg-primary"
                               : "bg-foreground/50"
-                          }`}
+                            }`}
                         />
                       </span>
                       {skill.demand}
@@ -526,8 +527,8 @@ export default function Home() {
                 </div>
               </div>
               <button
-                onClick={()=>{window.open("https://www.udemy.com/courses/search/?src=ukw&q=tech","blank")}}
-              className="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all hover:scale-105 shadow-lg shadow-primary/25">
+                onClick={() => { window.open("https://www.udemy.com/courses/search/?src=ukw&q=tech", "blank") }}
+                className="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all hover:scale-105 shadow-lg shadow-primary/25">
                 Explore Courses
               </button>
             </div>
@@ -632,77 +633,77 @@ export default function Home() {
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[
               {
-                title: "Software Engineer",
-                icon: "💻",
-                openings: "High Demand",
-                avgSalary: "$110k - $160k",
-                remote: true,
-                growth: "Steady",
-              },
-              {
-                title: "AI & Machine Learning",
-                icon: "🧠",
-                openings: "Surging",
-                avgSalary: "$130k - $190k",
-                remote: true,
-                growth: "Very High",
-              },
-              {
-                title: "Data Science & Analytics",
-                icon: "📊",
-                openings: "High Demand",
-                avgSalary: "$105k - $150k",
-                remote: true,
-                growth: "Very High",
-              },
-              {
-                title: "Cloud & Infrastructure",
-                icon: "☁️",
-                openings: "High Demand",
-                avgSalary: "$120k - $170k",
-                remote: true,
-                growth: "Very High",
-              },
-              {
-                title: "Cybersecurity",
-                icon: "🛡️",
-                openings: "Critical Shortage",
-                avgSalary: "$115k - $165k",
-                remote: true,
-                growth: "Very High",
-              },
-              {
-                title: "DevOps & SRE",
-                icon: "🔁",
-                openings: "High Demand",
-                avgSalary: "$125k - $175k",
-                remote: true,
-                growth: "High",
-              },
-              {
-                title: "Product Management",
-                icon: "🎯",
-                openings: "Steady",
-                avgSalary: "$110k - $160k",
-                remote: true,
-                growth: "High",
-              },
-              {
-                title: "Mobile Development",
-                icon: "📱",
-                openings: "Moderate",
-                avgSalary: "$95k - $145k",
-                remote: true,
-                growth: "Steady",
-              },
-              {
-                title: "UI / UX Design",
-                icon: "🎨",
-                openings: "High Demand",
-                avgSalary: "$85k - $135k",
-                remote: true,
-                growth: "High",
-              },
+  title: "Software Engineer",
+  logo: "https://cdn.simpleicons.org/git",
+  openings: "High Demand",
+  avgSalary: "$110k - $160k",
+  remote: true,
+  growth: "Steady",
+},
+{
+  title: "AI & Machine Learning",
+  logo: "https://cdn.simpleicons.org/pytorch",
+  openings: "Surging",
+  avgSalary: "$130k - $190k",
+  remote: true,
+  growth: "Very High",
+},
+{
+  title: "Data Science & Analytics",
+  logo: "https://cdn.simpleicons.org/numpy",
+  openings: "High Demand",
+  avgSalary: "$105k - $150k",
+  remote: true,
+  growth: "Very High",
+},
+{
+  title: "Cloud & Infrastructure",
+  logo: "https://cdn.simpleicons.org/googlecloud",
+  openings: "High Demand",
+  avgSalary: "$120k - $170k",
+  remote: true,
+  growth: "Very High",
+},
+{
+  title: "Cybersecurity",
+  logo: "https://cdn.simpleicons.org/fortinet",
+  openings: "Critical Shortage",
+  avgSalary: "$115k - $165k",
+  remote: true,
+  growth: "Very High",
+},
+{
+  title: "DevOps & SRE",
+  logo: "https://cdn.simpleicons.org/kubernetes",
+  openings: "High Demand",
+  avgSalary: "$125k - $175k",
+  remote: true,
+  growth: "High",
+},
+{
+  title: "Product Management",
+  logo: "https://cdn.simpleicons.org/notion",
+  openings: "Steady",
+  avgSalary: "$110k - $160k",
+  remote: true,
+  growth: "High",
+},
+{
+  title: "Mobile Development",
+  logo: "https://cdn.simpleicons.org/android",
+  openings: "Moderate",
+  avgSalary: "$95k - $145k",
+  remote: true,
+  growth: "Steady",
+},
+{
+  title: "UI / UX Design",
+  logo: "https://cdn.simpleicons.org/sketch",
+  openings: "High Demand",
+  avgSalary: "$85k - $135k",
+  remote: true,
+  growth: "High",
+}
             ].map((domain, i) => (
               <motion.div
                 key={domain.title}
@@ -730,16 +731,15 @@ export default function Home() {
                   <div className="flex items-start justify-between mb-5">
                     {/* Icon container with solid background */}
                     <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <span className="text-2xl drop-shadow-sm">{domain.icon}</span>
+                      <img src={domain.logo} alt={domain.name} className="w-6 h-6 object-contain group-hover:scale-110 transition-transform duration-300" />
                     </div>
 
                     {/* Growth badge */}
                     <span
-                      className={`px-3 py-1 rounded-md text-[11px] font-bold tracking-wide shadow-sm ${
-                        domain.growth === "Very High"
+                      className={`px-3 py-1 rounded-md text-[11px] font-bold tracking-wide shadow-sm ${domain.growth === "Very High"
                           ? "bg-green-500/15 text-green-600 border border-green-500/30"
                           : "bg-blue-500/15 text-blue-600 border border-blue-500/30"
-                      }`}
+                        }`}
                     >
                       {domain.growth}
                     </span>
@@ -801,7 +801,7 @@ export default function Home() {
                   </div>
 
                   {/* Hover CTA */}
-                  <div className="mt-4 flex items-center gap-2 text-sm text-primary font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {/* <div className="mt-4 flex items-center gap-2 text-sm text-primary font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span>Explore roles</span>
                     <svg
                       className="w-4 h-4 group-hover:translate-x-1 transition-transform"
@@ -816,7 +816,7 @@ export default function Home() {
                         d="M13 7l5 5m0 0l-5 5m5-5H6"
                       />
                     </svg>
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Corner accent */}
@@ -859,9 +859,9 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <button 
-              onClick={()=>{window.open("https://in.indeed.com/career-advice/resumes-cover-letters/in-demand-tech-skills", "_blank")}}
-              className="px-6 py-3 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all hover:scale-105 shadow-lg shadow-primary/25">
+              <button
+                onClick={() => { window.open("https://in.indeed.com/career-advice/resumes-cover-letters/in-demand-tech-skills", "_blank") }}
+                className="px-6 py-3 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all hover:scale-105 shadow-lg shadow-primary/25">
                 View All Categories
               </button>
             </div>
@@ -876,516 +876,515 @@ export default function Home() {
 
       {/* ================= INSIGHTS ================= */}
       <section className="relative py-24 px-6 max-w-7xl mx-auto mb-20 overflow-hidden">
-  {/* Background decorations */}
-  <div className="absolute inset-0 -z-10">
-    <div className="absolute top-0 left-1/3 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-    <div className="absolute bottom-0 right-1/3 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
-  </div>
-
-  {/* Subtle grid pattern */}
-  <div className="absolute inset-0 -z-10 opacity-[0.015]">
-    <div className="absolute inset-0" style={{
-      backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px),
-                       linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
-      backgroundSize: '4rem 4rem'
-    }} />
-  </div>
-
-  {/* Header */}
-  <div className="text-center mb-16">
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={fadeUp}
-      className="inline-flex items-center gap-2 mb-5 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 backdrop-blur-sm"
-    >
-      <svg className="w-3.5 h-3.5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
-        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
-      </svg>
-      <span className="text-xs font-semibold text-primary uppercase tracking-wide">
-        Market Insights
-      </span>
-    </motion.div>
-
-    <motion.h2
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={fadeUp}
-      className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3"
-    >
-      Hiring Intelligence at a{" "}
-      <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-        Glance
-      </span>
-    </motion.h2>
-
-    <motion.p
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={fadeUp}
-      custom={1}
-      className="text-base md:text-lg text-foreground/70 max-w-2xl mx-auto"
-    >
-      Real-time market signals powering smarter recruitment decisions
-    </motion.p>
-  </div>
-
-  {/* Stats Grid */}
-  <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-    {[
-      {
-        value: "2.3×",
-        title: "Growth in Full-Stack Roles",
-        description: "Demand for full-stack developers has more than doubled in the past year",
-        icon: (
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clipRule="evenodd" />
-          </svg>
-        ),
-        trend: "+130%",
-        color: "from-blue-500/20 to-cyan-500/20"
-      },
-      {
-        value: "40%",
-        title: "Rise in Remote Hiring",
-        description: "Companies are increasingly embracing remote-first hiring strategies",
-        icon: (
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-          </svg>
-        ),
-        trend: "+40%",
-        color: "from-green-500/20 to-emerald-500/20"
-      },
-      {
-        value: "AI-Driven",
-        title: "Recruitment Is Evolving",
-        description: "Smart automation is transforming how top companies find talent",
-        icon: (
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" />
-          </svg>
-        ),
-        trend: "New",
-        color: "from-purple-500/20 to-pink-500/20"
-      },
-    ].map((stat, i) => (
-      <motion.div
-        key={stat.title}
-        custom={i}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeUp}
-        whileHover={{ y: -6, scale: 1.02 }}
-        className="group relative bg-card/70 backdrop-blur-sm border border-border hover:border-primary/40 rounded-2xl p-8 transition-all duration-300 overflow-hidden cursor-pointer"
-      >
-        {/* Animated gradient background */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-        
-        {/* Shimmer effect */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        {/* Background decorations */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 left-1/3 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/3 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
         </div>
 
-        {/* Glow effect */}
-        <div className="absolute -inset-1 rounded-2xl bg-primary/20 opacity-0 blur-xl group-hover:opacity-100 transition-opacity duration-300" />
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 -z-10 opacity-[0.015]">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px),
+                       linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
+            backgroundSize: '4rem 4rem'
+          }} />
+        </div>
 
-        <div className="relative">
-          {/* Header with icon and trend */}
-          <div className="flex items-start justify-between mb-6">
-            {/* Icon */}
-            <div className="flex-shrink-0 w-11 h-11 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
-              {stat.icon}
-            </div>
-
-            {/* Trend Badge */}
-            <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold ${
-              stat.trend === "New" 
-                ? "bg-purple-500/15 text-purple-500 border border-purple-500/20"
-                : "bg-green-500/15 text-green-500 border border-green-500/20"
-            }`}>
-              {stat.trend}
+        {/* Header */}
+        <div className="text-center mb-16">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="inline-flex items-center gap-2 mb-5 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 backdrop-blur-sm"
+          >
+            <svg className="w-3.5 h-3.5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+              <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+            </svg>
+            <span className="text-xs font-semibold text-primary uppercase tracking-wide">
+              Market Insights
             </span>
-          </div>
+          </motion.div>
 
-          {/* Value */}
-          <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent mb-4 group-hover:scale-105 transition-transform duration-300">
-            {stat.value}
-          </div>
+          <motion.h2
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3"
+          >
+            Hiring Intelligence at a{" "}
+            <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              Glance
+            </span>
+          </motion.h2>
 
-          {/* Title */}
-          <h3 className="text-base md:text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
-            {stat.title}
-          </h3>
-
-          {/* Description */}
-          <p className="text-sm text-foreground/60 leading-relaxed mb-4">
-            {stat.description}
-          </p>
-
-          {/* Divider */}
-          <div className="h-[2px] w-12 bg-gradient-to-r from-primary via-primary/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={1}
+            className="text-base md:text-lg text-foreground/70 max-w-2xl mx-auto"
+          >
+            Real-time market signals powering smarter recruitment decisions
+          </motion.p>
         </div>
 
-        {/* Corner accent */}
-        <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-primary/10 to-transparent rounded-tl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      </motion.div>
-    ))}
-  </div>
+        {/* Stats Grid */}
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          {[
+            {
+              value: "2.3×",
+              title: "Growth in Full-Stack Roles",
+              description: "Demand for full-stack developers has more than doubled in the past year",
+              icon: (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clipRule="evenodd" />
+                </svg>
+              ),
+              trend: "+130%",
+              color: "from-blue-500/20 to-cyan-500/20"
+            },
+            {
+              value: "40%",
+              title: "Rise in Remote Hiring",
+              description: "Companies are increasingly embracing remote-first hiring strategies",
+              icon: (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                </svg>
+              ),
+              trend: "+40%",
+              color: "from-green-500/20 to-emerald-500/20"
+            },
+            {
+              value: "AI-Driven",
+              title: "Recruitment Is Evolving",
+              description: "Smart automation is transforming how top companies find talent",
+              icon: (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" />
+                </svg>
+              ),
+              trend: "New",
+              color: "from-purple-500/20 to-pink-500/20"
+            },
+          ].map((stat, i) => (
+            <motion.div
+              key={stat.title}
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              whileHover={{ y: -6, scale: 1.02 }}
+              className="group relative bg-card/70 backdrop-blur-sm border border-border hover:border-primary/40 rounded-2xl p-8 transition-all duration-300 overflow-hidden cursor-pointer"
+            >
+              {/* Animated gradient background */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
-  {/* Bottom CTA */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: 0.5 }}
-    className="mt-12 text-center"
-  >
-    <div className="inline-flex flex-col sm:flex-row items-center gap-3 p-5 rounded-xl border border-border bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-colors">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-lg shadow-primary/25">
-          <svg className="w-5 h-5 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-          </svg>
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+              </div>
+
+              {/* Glow effect */}
+              <div className="absolute -inset-1 rounded-2xl bg-primary/20 opacity-0 blur-xl group-hover:opacity-100 transition-opacity duration-300" />
+
+              <div className="relative">
+                {/* Header with icon and trend */}
+                <div className="flex items-start justify-between mb-6">
+                  {/* Icon */}
+                  <div className="flex-shrink-0 w-11 h-11 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
+                    {stat.icon}
+                  </div>
+
+                  {/* Trend Badge */}
+                  <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold ${stat.trend === "New"
+                      ? "bg-purple-500/15 text-purple-500 border border-purple-500/20"
+                      : "bg-green-500/15 text-green-500 border border-green-500/20"
+                    }`}>
+                    {stat.trend}
+                  </span>
+                </div>
+
+                {/* Value */}
+                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent mb-4 group-hover:scale-105 transition-transform duration-300">
+                  {stat.value}
+                </div>
+
+                {/* Title */}
+                <h3 className="text-base md:text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                  {stat.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-sm text-foreground/60 leading-relaxed mb-4">
+                  {stat.description}
+                </p>
+
+                {/* Divider */}
+                <div className="h-[2px] w-12 bg-gradient-to-r from-primary via-primary/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              </div>
+
+              {/* Corner accent */}
+              <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-primary/10 to-transparent rounded-tl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </motion.div>
+          ))}
         </div>
-        <div className="text-left">
-          <p className="text-sm font-bold text-foreground">Want detailed market insights?</p>
-          <p className="text-xs text-foreground/60">Access comprehensive hiring analytics</p>
-        </div>
-      </div>
-      <button 
-      onClick={()=>{window.open("https://www.techelevator.com/tech-jobs/tech-industry-trends/tech-job-market/", "_blank")}}
-      className="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all hover:scale-105 shadow-lg shadow-primary/25">
-        View Full Report
-      </button>
-    </div>
-  </motion.div>
 
-  {/* Stats Footer */}
-  <motion.div
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true }}
-    transition={{ delay: 0.7 }}
-    className="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs text-foreground/60"
-  >
-    <div className="flex items-center gap-2">
-      <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-      <span>Real-time data from <strong className="text-foreground">100K+</strong> companies</span>
-    </div>
-    <span className="hidden sm:inline text-foreground/30">•</span>
-    <div className="flex items-center gap-2">
-      <svg className="w-3.5 h-3.5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-      </svg>
-      <span>Updated hourly</span>
-    </div>
-  </motion.div>
-</section>
-
-      {/* ================= AI FEATURES ================= */}
-      <section className="relative py-20 px-6 mx-auto max-w-7xl mb-20 overflow-hidden">
-  {/* Background with gradient */}
-  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent rounded-3xl" />
-  
-  {/* Animated background elements */}
-  <div className="absolute inset-0 overflow-hidden rounded-3xl">
-    <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-    <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse delay-1000" />
-  </div>
-
-  {/* Grid pattern overlay */}
-  <div className="absolute inset-0 opacity-[0.02] rounded-3xl">
-    <div className="absolute inset-0" style={{
-      backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px),
-                       linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
-      backgroundSize: '3rem 3rem'
-    }} />
-  </div>
-
-  <div className="relative text-center">
-    {/* Badge */}
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="inline-flex items-center gap-2 mb-6 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 backdrop-blur-sm"
-    >
-      <span className="relative flex h-2 w-2">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-        <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
-      </span>
-      <span className="text-xs font-bold text-primary uppercase tracking-wider">
-        Live Features
-      </span>
-    </motion.div>
-
-    {/* Heading */}
-    <motion.h2
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.1 }}
-      className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
-    >
-      <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-        AI-Powered Hiring
-      </span>
-    </motion.h2>
-
-    {/* Description */}
-    <motion.p
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.2 }}
-      className="text-base md:text-lg text-foreground/70 mb-12 max-w-2xl mx-auto"
-    >
-      Built to eliminate guesswork from recruitment with intelligent automation and data-driven insights
-    </motion.p>
-
-    {/* Feature Grid */}
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.3 }}
-      className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-5xl mx-auto"
-    >
-      {[
-        {
-          icon: (
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-          ),
-          title: "AI Resume Extraction",
-          description: "Instantly parse PDFs to extract key skills and experience."
-        },
-        {
-          icon: (
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-            </svg>
-          ),
-          title: "Smart Candidate Matching",
-          description: "Compare candidate skills against job requirements automatically."
-        },
-        {
-          icon: (
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-            </svg>
-          ),
-          title: "Automated AI Ranking",
-          description: "Recruiters get a sorted list of top candidates instantly."
-        },
-      ].map((feature, i) => (
+        {/* Bottom CTA */}
         <motion.div
-          key={feature.title}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4 + i * 0.1 }}
-          whileHover={{ y: -4, scale: 1.02 }}
-          className="group relative bg-background/80 backdrop-blur-sm border border-border hover:border-primary/40 rounded-xl p-6 transition-all duration-300 overflow-hidden"
+          transition={{ delay: 0.5 }}
+          className="mt-12 text-center"
         >
-          {/* Hover gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          
-          {/* Glow */}
-          <div className="absolute -inset-1 rounded-xl bg-primary/10 opacity-0 blur-lg group-hover:opacity-100 transition-opacity duration-300" />
-
-          <div className="relative text-center">
-            {/* Icon */}
-            <div className="inline-flex items-center justify-center w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/10 text-primary group-hover:scale-110 transition-transform duration-300">
-              {feature.icon}
+          <div className="inline-flex flex-col sm:flex-row items-center gap-3 p-5 rounded-xl border border-border bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-colors">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-lg shadow-primary/25">
+                <svg className="w-5 h-5 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <div className="text-left">
+                <p className="text-sm font-bold text-foreground">Want detailed market insights?</p>
+                <p className="text-xs text-foreground/60">Access comprehensive hiring analytics</p>
+              </div>
             </div>
-
-            {/* Title */}
-            <h3 className="text-base font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-              {feature.title}
-            </h3>
-
-            {/* Description */}
-            <p className="text-sm text-foreground/60 leading-relaxed">
-              {feature.description}
-            </p>
+            <button
+              onClick={() => { window.open("https://www.techelevator.com/tech-jobs/tech-industry-trends/tech-job-market/", "_blank") }}
+              className="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold transition-all hover:scale-105 shadow-lg shadow-primary/25">
+              View Full Report
+            </button>
           </div>
         </motion.div>
-      ))}
-    </motion.div>
 
-    {/* CTA Section */}
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.8 }}
-      className="flex flex-col sm:flex-row items-center justify-center gap-4"
-    >
-      <Link href="/register" className="group relative px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground text-sm font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 overflow-hidden hover:scale-105">
-        <span className="relative z-10 flex items-center gap-2">
-          Try AI Features Now
-          <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-        </span>
-        <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      </Link>
-    </motion.div>
-  </div>
-</section>
+        {/* Stats Footer */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.7 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs text-foreground/60"
+        >
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            <span>Real-time data from <strong className="text-foreground">100K+</strong> companies</span>
+          </div>
+          <span className="hidden sm:inline text-foreground/30">•</span>
+          <div className="flex items-center gap-2">
+            <svg className="w-3.5 h-3.5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+            </svg>
+            <span>Updated hourly</span>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* ================= AI FEATURES ================= */}
+      <section className="relative py-20 px-6 mx-auto max-w-7xl mb-20 overflow-hidden">
+        {/* Background with gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent rounded-3xl" />
+
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden rounded-3xl">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        </div>
+
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.02] rounded-3xl">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px),
+                       linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
+            backgroundSize: '3rem 3rem'
+          }} />
+        </div>
+
+        <div className="relative text-center">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 mb-6 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 backdrop-blur-sm"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+            </span>
+            <span className="text-xs font-bold text-primary uppercase tracking-wider">
+              Live Features
+            </span>
+          </motion.div>
+
+          {/* Heading */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
+          >
+            <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+              AI-Powered Hiring
+            </span>
+          </motion.h2>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-base md:text-lg text-foreground/70 mb-12 max-w-2xl mx-auto"
+          >
+            Built to eliminate guesswork from recruitment with intelligent automation and data-driven insights
+          </motion.p>
+
+          {/* Feature Grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-5xl mx-auto"
+          >
+            {[
+              {
+                icon: (
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                ),
+                title: "AI Resume Extraction",
+                description: "Instantly parse PDFs to extract key skills and experience."
+              },
+              {
+                icon: (
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                  </svg>
+                ),
+                title: "Smart Candidate Matching",
+                description: "Compare candidate skills against job requirements automatically."
+              },
+              {
+                icon: (
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
+                  </svg>
+                ),
+                title: "Automated AI Ranking",
+                description: "Recruiters get a sorted list of top candidates instantly."
+              },
+            ].map((feature, i) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 + i * 0.1 }}
+                whileHover={{ y: -4, scale: 1.02 }}
+                className="group relative bg-background/80 backdrop-blur-sm border border-border hover:border-primary/40 rounded-xl p-6 transition-all duration-300 overflow-hidden"
+              >
+                {/* Hover gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Glow */}
+                <div className="absolute -inset-1 rounded-xl bg-primary/10 opacity-0 blur-lg group-hover:opacity-100 transition-opacity duration-300" />
+
+                <div className="relative text-center">
+                  {/* Icon */}
+                  <div className="inline-flex items-center justify-center w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/10 text-primary group-hover:scale-110 transition-transform duration-300">
+                    {feature.icon}
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-base font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {feature.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-sm text-foreground/60 leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* CTA Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <Link href="/register" className="group relative px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground text-sm font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 overflow-hidden hover:scale-105">
+              <span className="relative z-10 flex items-center gap-2">
+                Try AI Features Now
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
 
       {/* ================= FINAL CTA ================= */}
       <section className="relative py-24 px-6 mb-20 overflow-hidden">
-  {/* Background elements */}
-  <div className="absolute inset-0 -z-10">
-    <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-3xl" />
-  </div>
+        {/* Background elements */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-3xl" />
+        </div>
 
-  {/* Animated grid pattern */}
-  <div className="absolute inset-0 -z-10 opacity-[0.02]">
-    <div className="absolute inset-0" style={{
-      backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px),
+        {/* Animated grid pattern */}
+        <div className="absolute inset-0 -z-10 opacity-[0.02]">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px),
                        linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
-      backgroundSize: '4rem 4rem'
-    }} />
-  </div>
+            backgroundSize: '4rem 4rem'
+          }} />
+        </div>
 
-  <div className="max-w-5xl mx-auto text-center">
-    {/* Badge */}
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="inline-flex items-center gap-2 mb-6 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 backdrop-blur-sm"
-    >
-      <svg className="w-3.5 h-3.5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-      </svg>
-      <span className="text-xs font-semibold text-primary uppercase tracking-wide">
-        Ready to Transform Your Career?
-      </span>
-    </motion.div>
-
-    {/* Main Heading */}
-    <motion.h2
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.1 }}
-      className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
-    >
-      Your Career.{" "}
-      <span className="block mt-2 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-        Backed by Intelligence.
-      </span>
-    </motion.h2>
-
-    {/* Subheading */}
-    <motion.p
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.2 }}
-      className="text-base md:text-lg text-foreground/70 mb-10 max-w-2xl mx-auto"
-    >
-      Join thousands of professionals who&apos;ve found their dream roles through AI-powered matching and verified opportunities
-    </motion.p>
-
-    {/* CTA Buttons */}
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.3 }}
-      className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
-    >
-      <Link
-        href="/jobs"
-        className="group relative w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground text-base font-bold shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-300 overflow-hidden hover:scale-105"
-      >
-        <span className="relative z-10 flex items-center justify-center gap-2">
-          Start Applying
-          <svg
-            className="w-5 h-5 group-hover:translate-x-1 transition-transform"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+        <div className="max-w-5xl mx-auto text-center">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 mb-6 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 backdrop-blur-sm"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M13 7l5 5m0 0l-5 5m5-5H6"
-            />
-          </svg>
-        </span>
-        <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      </Link>
+            <svg className="w-3.5 h-3.5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+            </svg>
+            <span className="text-xs font-semibold text-primary uppercase tracking-wide">
+              Ready to Transform Your Career?
+            </span>
+          </motion.div>
 
-      <Link
-        href="/register"
-        className="group w-full sm:w-auto px-8 py-4 rounded-xl border-2 border-border hover:border-primary/50 bg-background/50 backdrop-blur-sm text-foreground text-base font-bold hover:bg-foreground/5 transition-all duration-300 flex items-center justify-center gap-2"
-      >
-        Join HireSight-AI
-        <svg
-          className="w-5 h-5 group-hover:rotate-12 transition-transform"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
-          />
-        </svg>
-      </Link>
-    </motion.div>
+          {/* Main Heading */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
+          >
+            Your Career.{" "}
+            <span className="block mt-2 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+              Backed by Intelligence.
+            </span>
+          </motion.h2>
+
+          {/* Subheading */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-base md:text-lg text-foreground/70 mb-10 max-w-2xl mx-auto"
+          >
+            Join thousands of professionals who&apos;ve found their dream roles through AI-powered matching and verified opportunities
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+          >
+            <Link
+              href="/jobs"
+              className="group relative w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground text-base font-bold shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-300 overflow-hidden hover:scale-105"
+            >
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                Start Applying
+                <svg
+                  className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </Link>
+
+            <Link
+              href="/register"
+              className="group w-full sm:w-auto px-8 py-4 rounded-xl border-2 border-border hover:border-primary/50 bg-background/50 backdrop-blur-sm text-foreground text-base font-bold hover:bg-foreground/5 transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              Join HireSight-AI
+              <svg
+                className="w-5 h-5 group-hover:rotate-12 transition-transform"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
+                />
+              </svg>
+            </Link>
+          </motion.div>
 
 
-    {/* Trust Indicators */}
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.8 }}
-      className="flex flex-wrap items-center justify-center gap-6 text-xs text-foreground/60"
-    >
-      <div className="flex items-center gap-2">
-        <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-        </svg>
-        <span>No credit card required</span>
-      </div>
-      <span className="hidden sm:inline text-foreground/30">•</span>
-      <div className="flex items-center gap-2">
-        <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-        </svg>
-        <span>100% secure & verified</span>
-      </div>
-      <span className="hidden sm:inline text-foreground/30">•</span>
-      <div className="flex items-center gap-2">
-        <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
-        </svg>
-        <span>Free to get started</span>
-      </div>
-    </motion.div>
+          {/* Trust Indicators */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8 }}
+            className="flex flex-wrap items-center justify-center gap-6 text-xs text-foreground/60"
+          >
+            <div className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              <span>No credit card required</span>
+            </div>
+            <span className="hidden sm:inline text-foreground/30">•</span>
+            <div className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+              </svg>
+              <span>100% secure & verified</span>
+            </div>
+            <span className="hidden sm:inline text-foreground/30">•</span>
+            <div className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+              </svg>
+              <span>Free to get started</span>
+            </div>
+          </motion.div>
 
 
-  </div>
-</section>
+        </div>
+      </section>
     </main>
   );
 }
