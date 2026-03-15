@@ -364,38 +364,42 @@ export default function JobsPage() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </Link>
-
-                        {!user ? (
-                          <Link
-                            href="/login"
-                            className="px-5 py-2 rounded-lg text-sm font-bold bg-gradient-to-r from-primary to-primary/90 text-primary-foreground hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center gap-1.5"
-                          >
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                            </svg>
-                            Login to Apply
-                          </Link>
-                        ) : !user.resume ? (
-                          <Link
-                            href="/dashboard/settings"
-                            className="px-5 py-2 rounded-lg text-sm font-bold bg-yellow-500 text-primary-foreground hover:bg-yellow-600 transition-all flex items-center gap-1.5"
-                          >
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                            </svg>
-                            Upload Resume
-                          </Link>
-                        ) : (
-                          <button
-                            onClick={() => applyToJob(job._id)}
-                            className="px-5 py-2 rounded-lg text-sm font-bold bg-gradient-to-r from-primary to-primary/90 text-primary-foreground hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center gap-1.5"
-                          >
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            Apply Now
-                          </button>
+                        {user?.role !== "recruiter" && (
+                          <>
+                            {!user ? (
+                              <Link
+                                href="/login"
+                                className="px-5 py-2 rounded-lg text-sm font-bold bg-gradient-to-r from-primary to-primary/90 text-primary-foreground hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center gap-1.5"
+                              >
+                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                                </svg>
+                                Login to Apply
+                              </Link>
+                            ) : !user.resume ? (
+                              <Link
+                                href="/dashboard/settings"
+                                className="px-5 py-2 rounded-lg text-sm font-bold bg-yellow-500 text-primary-foreground hover:bg-yellow-600 transition-all flex items-center gap-1.5"
+                              >
+                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                </svg>
+                                Upload Resume
+                              </Link>
+                            ) : (
+                              <button
+                                onClick={() => applyToJob(job._id)}
+                                className="px-5 py-2 rounded-lg text-sm font-bold bg-gradient-to-r from-primary to-primary/90 text-primary-foreground hover:shadow-lg hover:shadow-primary/25 transition-all flex items-center gap-1.5"
+                              >
+                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Apply Now
+                              </button>
+                            )}
+                          </>
                         )}
+
                       </div>
                     </div>
                   </div>
