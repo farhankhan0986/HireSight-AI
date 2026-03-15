@@ -294,7 +294,7 @@ export default function PostJobPage() {
                   <input
                     name="salaryRange"
                     value={form.salaryRange}
-                    placeholder="e.g. 10-15 LPA"
+                    placeholder="e.g. 10-15 LPA and add currency also $ or ₹"
                     onChange={handleChange}
                     className="w-full pl-11 pr-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all"
                   />

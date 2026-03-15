@@ -13,59 +13,65 @@ export default function JobsPage() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [initialized, setInitialized] = useState(false);
+  const [showFilters, setShowFilters] = useState(false)
 
-
+  const [filters, setFilters] = useState({
+    location: "",
+    experience: "",
+    jobType: "",
+    skill: ""
+  })
 
   const loadUser = async () => {
-  try {
-    const res = await fetch("/api/auth/me", {
-      credentials: "include",
-    });
-    const data = await res.json();
-    if (data.loggedIn) setUser(data);
-  } catch {}
-};
+    try {
+      const res = await fetch("/api/auth/me", {
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (data.loggedIn) setUser(data);
+    } catch { }
+  };
 
-const checkAuth = async () => {
-  try {
-    const res = await fetch("/api/auth/me", {
-      credentials: "include",
-    });
-    const data = await res.json();
-    setLoggedIn(data.loggedIn);
-  } catch {
-    setLoggedIn(false);
-  }
-};
+  const checkAuth = async () => {
+    try {
+      const res = await fetch("/api/auth/me", {
+        credentials: "include",
+      });
+      const data = await res.json();
+      setLoggedIn(data.loggedIn);
+    } catch {
+      setLoggedIn(false);
+    }
+  };
 
   if (!initialized) {
-  setInitialized(true);
-  loadUser();
-  checkAuth();
-}
+    setInitialized(true);
+    loadUser();
+    checkAuth();
+  }
 
   const fetchJobs = useCallback(async () => {
-  try {
-    setLoading(true);
-    const res = await fetch(`/api/jobs?page=${page}&limit=10`);
-    const data = await res.json();
+    try {
+      setLoading(true);
+      const res = await fetch(`/api/jobs?page=${page}&limit=10`);
+      const data = await res.json();
 
-    if (!res.ok) {
-      setError("Failed to load jobs");
-      return;
+      if (!res.ok) {
+        setError("Failed to load jobs");
+        return;
+      }
+
+      setJobs(data.jobs);
+      setTotalPages(data.totalPages);
+    } catch {
+      setError("Something went wrong");
+    } finally {
+      setLoading(false);
     }
-
-    setJobs(data.jobs);
-    setTotalPages(data.totalPages);
-  } catch {
-    setError("Something went wrong");
-  } finally {
-    setLoading(false);
-  }
-}, [page]);
-useEffect(() => {
-  fetchJobs();
-}, [fetchJobs]);
+  }, [page]);
+  useEffect(() => {
+    fetchJobs();
+  }, [fetchJobs]);
 
 
 
@@ -181,7 +187,9 @@ useEffect(() => {
 
             {/* Filter/Sort (placeholder) */}
             <div className="hidden md:flex items-center gap-2">
-              <button className="px-4 py-2 rounded-lg border border-border hover:border-primary/30 bg-background text-sm font-medium transition-all flex items-center gap-2">
+              <button
+                onClick={() => setShowFilters(true)}
+                className="px-4 py-2 rounded-lg border border-border hover:border-primary/30 bg-background text-sm font-medium transition-all flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                 </svg>
@@ -189,6 +197,49 @@ useEffect(() => {
               </button>
             </div>
           </div>
+        </div>
+        <div className="flex gap-2 flex-wrap mb-4 justify-between">
+          <div className="flex gap-2 flex-wrap px-2 py-2 bg-card/50 ">
+            {filters.location && (
+              <span className="px-3 py-1 rounded-full text-sm bg-foreground/5 border border-border text-foreground/80">
+                {filters.location}
+              </span>
+            )}
+
+            {filters.experience && (
+              <span className="px-3 py-1 rounded-full text-sm bg-foreground/5 border border-border text-foreground/80">
+                {filters.experience}
+              </span>
+            )}
+
+            {filters.jobType && (
+              <span className="px-3 py-1 rounded-full text-sm bg-foreground/5 border border-border text-foreground/80">
+                {filters.jobType}
+              </span>
+            )}
+
+            {filters.skill && (
+              <span className="px-3 py-1 rounded-full text-sm bg-foreground/5 border border-border text-foreground/80">
+                {filters.skill}
+              </span>
+            )}
+          </div>
+          <div>
+            <button
+              onClick={() =>
+                setFilters({
+                  location: "",
+                  experience: "",
+                  jobType: "",
+                  skill: ""
+                })
+              }
+              className="px-4 py-2 rounded-lg border border-border bg-background hover:bg-foreground/5 transition"
+            >
+              Reset
+            </button>
+          </div>
+
         </div>
 
         {jobs.length === 0 ? (
@@ -265,7 +316,7 @@ useEffect(() => {
                       {job.salaryRange && (
                         <div className="flex-shrink-0 px-4 py-2 rounded-lg bg-gradient-to-r from-primary/15 to-primary/10 border border-primary/20">
                           <p className="text-xs text-foreground/60 mb-0.5">Salary</p>
-                          <p className="text-sm font-bold text-primary">₹{job.salaryRange}</p>
+                          <p className="text-sm font-bold text-primary">{job.salaryRange}</p>
                         </div>
                       )}
                     </div>
@@ -392,10 +443,9 @@ useEffect(() => {
                         key={pageNum}
                         onClick={() => setPage(pageNum)}
                         className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all
-                          ${
-                            page === pageNum
-                              ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
-                              : "border border-border hover:bg-primary/10 hover:border-primary/30"
+                          ${page === pageNum
+                            ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
+                            : "border border-border hover:bg-primary/10 hover:border-primary/30"
                           }`}
                       >
                         {pageNum}
@@ -431,6 +481,117 @@ useEffect(() => {
                 </button>
               </div>
             )}
+
+            {showFilters && (
+              <div
+                className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+                onClick={() => setShowFilters(false)}
+              >
+
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="bg-card border border-border rounded-xl p-6 w-[400px] shadow-xl"
+                >
+
+                  <h2 className="text-xl font-semibold mb-4">Filter Jobs</h2>
+
+                  {/* Location */}
+                  <div className="mb-4">
+                    <label className="block mb-1 text-sm">Location</label>
+                    <select
+                      className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+                      value={filters.location}
+                      onChange={(e) =>
+                        setFilters({ ...filters, location: e.target.value })
+                      }
+                    >
+                      <option value="">Any</option>
+                      <option value="remote">Remote</option>
+                      <option value="onsite">Onsite</option>
+                      <option value="hybrid">Hybrid</option>
+                    </select>
+                  </div>
+
+                  {/* Experience */}
+                  <div className="mb-4">
+                    <label className="block mb-1 text-sm text-foreground/70">Experience</label>
+                    <select
+                      className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+                      value={filters.experience}
+                      onChange={(e) =>
+                        setFilters({ ...filters, experience: e.target.value })
+                      }
+                    >
+                      <option value="">Any</option>
+                      <option value="fresher">Fresher</option>
+                      <option value="1-3">1-3 Years</option>
+                      <option value="3-5">3-5 Years</option>
+                      <option value="5+">5+ Years</option>
+                    </select>
+                  </div>
+
+                  {/* Job Type */}
+                  <div className="mb-4">
+                    <label className="block mb-1 text-foreground/70 text-sm">Job Type</label>
+                    <select
+                      className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+                      value={filters.jobType}
+                      onChange={(e) =>
+                        setFilters({ ...filters, jobType: e.target.value })
+                      }
+                    >
+                      <option value="">Any</option>
+                      <option value="fulltime">Full Time</option>
+                      <option value="internship">Internship</option>
+                      <option value="contract">Contract</option>
+                    </select>
+                  </div>
+
+                  {/* Skills */}
+                  <div className="mb-4">
+                    <label className="block text-foreground/70 mb-1 text-sm">Skill</label>
+                    <input
+                      type="text"
+                      placeholder="React, Node, Python"
+                      className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+                      value={filters.skill}
+                      onChange={(e) =>
+                        setFilters({ ...filters, skill: e.target.value })
+                      }
+                    />
+                  </div>
+
+                  {/* Buttons */}
+                  <div className="flex justify-end mt-6">
+
+                    {/* <button
+                      onClick={() =>
+                        setFilters({
+                          location: "",
+                          experience: "",
+                          jobType: "",
+                          skill: ""
+                        })
+                      }
+                      className="px-4 py-2 rounded-lg border border-border bg-background hover:bg-foreground/5 transition"
+                    >
+                      Reset
+                    </button> */}
+
+                    <button
+                      onClick={() => setShowFilters(false)}
+                      className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition font-semibold"
+                    >
+                      Apply
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </div>
+            )
+            }
           </>
         )}
       </div>
