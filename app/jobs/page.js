@@ -186,7 +186,7 @@ export default function JobsPage() {
             </div>
 
             {/* Filter/Sort (placeholder) */}
-            <div className="hidden md:flex items-center gap-2">
+            <div className=" md:flex items-center gap-2">
               <button
                 onClick={() => setShowFilters(true)}
                 className="px-4 py-2 rounded-lg border border-border hover:border-primary/30 bg-background text-sm font-medium transition-all flex items-center gap-2">
@@ -200,7 +200,7 @@ export default function JobsPage() {
         </div>
         <div className="flex gap-2 flex-wrap mb-4 justify-between">
           <div className="flex gap-2 flex-wrap px-2 py-2 bg-card/50 ">
-            {filters.location && (
+            {filters.location && (  
               <span className="px-3 py-1 rounded-full text-sm bg-foreground/5 border border-border text-foreground/80">
                 {filters.location}
               </span>
