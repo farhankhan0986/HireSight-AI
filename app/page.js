@@ -244,6 +244,160 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ================= AI FEATURES ================= */}
+      <section className="relative py-20 px-6 mx-auto max-w-7xl mb-20 overflow-hidden mt-24">
+        {/* Background with gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent rounded-3xl" />
+
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden rounded-3xl">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        </div>
+
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.02] rounded-3xl">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px),
+                       linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
+            backgroundSize: '3rem 3rem'
+          }} />
+        </div>
+
+        <div className="relative text-center">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 mb-6 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 backdrop-blur-sm"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+            </span>
+            <span className="text-xs font-bold text-primary uppercase tracking-wider">
+              Live Features
+            </span>
+          </motion.div>
+
+          {/* Heading */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
+          >
+            <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+              AI-Powered Hiring
+            </span>
+          </motion.h2>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-base md:text-lg text-foreground/70 mb-12 max-w-2xl mx-auto"
+          >
+            Built to eliminate guesswork from recruitment with intelligent automation and data-driven insights
+          </motion.p>
+
+          {/* Feature Grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-5xl mx-auto"
+          >
+            {[
+              {
+                icon: (
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                ),
+                title: "AI Resume Extraction",
+                description: "Instantly parse PDFs to extract key skills and experience."
+              },
+              {
+                icon: (
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                  </svg>
+                ),
+                title: "Smart Candidate Matching",
+                description: "Compare candidate skills against job requirements automatically."
+              },
+              {
+                icon: (
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
+                  </svg>
+                ),
+                title: "Automated AI Ranking",
+                description: "Recruiters get a sorted list of top candidates instantly."
+              },
+            ].map((feature, i) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 + i * 0.1 }}
+                whileHover={{ y: -4, scale: 1.02 }}
+                className="group relative bg-background/80 backdrop-blur-sm border border-border hover:border-primary/40 rounded-xl p-6 transition-all duration-300 overflow-hidden"
+              >
+                {/* Hover gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Glow */}
+                <div className="absolute -inset-1 rounded-xl bg-primary/10 opacity-0 blur-lg group-hover:opacity-100 transition-opacity duration-300" />
+
+                <div className="relative text-center">
+                  {/* Icon */}
+                  <div className="inline-flex items-center justify-center w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/10 text-primary group-hover:scale-110 transition-transform duration-300">
+                    {feature.icon}
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-base font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {feature.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-sm text-foreground/60 leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* CTA Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <Link href="/register" className="group relative px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground text-sm font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 overflow-hidden hover:scale-105">
+              <span className="relative z-10 flex items-center gap-2">
+                Try AI Features Now
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ================= IN-DEMAND SKILLS ================= */}
       <section className="relative py-24 px-6 overflow-hidden">
         {/* Background decorations */}
@@ -875,7 +1029,7 @@ export default function Home() {
       </section>
 
       {/* ================= INSIGHTS ================= */}
-      <section className="relative py-24 px-6 max-w-7xl mx-auto mb-20 overflow-hidden">
+      <section className="relative py-24 px-6 max-w-7xl mx-auto mb-10 overflow-hidden">
         {/* Background decorations */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-0 left-1/3 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -1085,160 +1239,6 @@ export default function Home() {
             <span>Updated hourly</span>
           </div>
         </motion.div>
-      </section>
-
-      {/* ================= AI FEATURES ================= */}
-      <section className="relative py-20 px-6 mx-auto max-w-7xl mb-20 overflow-hidden">
-        {/* Background with gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent rounded-3xl" />
-
-        {/* Animated background elements */}
-        <div className="absolute inset-0 overflow-hidden rounded-3xl">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse delay-1000" />
-        </div>
-
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 opacity-[0.02] rounded-3xl">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px),
-                       linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
-            backgroundSize: '3rem 3rem'
-          }} />
-        </div>
-
-        <div className="relative text-center">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 mb-6 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 backdrop-blur-sm"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
-            </span>
-            <span className="text-xs font-bold text-primary uppercase tracking-wider">
-              Live Features
-            </span>
-          </motion.div>
-
-          {/* Heading */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
-          >
-            <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-              AI-Powered Hiring
-            </span>
-          </motion.h2>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-base md:text-lg text-foreground/70 mb-12 max-w-2xl mx-auto"
-          >
-            Built to eliminate guesswork from recruitment with intelligent automation and data-driven insights
-          </motion.p>
-
-          {/* Feature Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-5xl mx-auto"
-          >
-            {[
-              {
-                icon: (
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                ),
-                title: "AI Resume Extraction",
-                description: "Instantly parse PDFs to extract key skills and experience."
-              },
-              {
-                icon: (
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                  </svg>
-                ),
-                title: "Smart Candidate Matching",
-                description: "Compare candidate skills against job requirements automatically."
-              },
-              {
-                icon: (
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                  </svg>
-                ),
-                title: "Automated AI Ranking",
-                description: "Recruiters get a sorted list of top candidates instantly."
-              },
-            ].map((feature, i) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 + i * 0.1 }}
-                whileHover={{ y: -4, scale: 1.02 }}
-                className="group relative bg-background/80 backdrop-blur-sm border border-border hover:border-primary/40 rounded-xl p-6 transition-all duration-300 overflow-hidden"
-              >
-                {/* Hover gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                {/* Glow */}
-                <div className="absolute -inset-1 rounded-xl bg-primary/10 opacity-0 blur-lg group-hover:opacity-100 transition-opacity duration-300" />
-
-                <div className="relative text-center">
-                  {/* Icon */}
-                  <div className="inline-flex items-center justify-center w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/10 text-primary group-hover:scale-110 transition-transform duration-300">
-                    {feature.icon}
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-base font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                    {feature.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-sm text-foreground/60 leading-relaxed">
-                    {feature.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* CTA Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.8 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <Link href="/register" className="group relative px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground text-sm font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 overflow-hidden hover:scale-105">
-              <span className="relative z-10 flex items-center gap-2">
-                Try AI Features Now
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </span>
-              <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </Link>
-          </motion.div>
-        </div>
       </section>
 
       {/* ================= FINAL CTA ================= */}
