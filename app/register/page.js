@@ -361,14 +361,15 @@ export default function RegisterPage() {
                   className="mt-1 w-4 h-4 rounded border-border bg-background text-primary focus:ring-2 focus:ring-primary/40 cursor-pointer"
                 />
                 <label className="text-sm text-foreground/70">
-                  I agree to the{" "}
-                  <Link href="/terms" className="text-primary hover:text-primary/80 font-semibold">
+                  I agree to the{" "} <span className="text-primary hover:text-primary/80 font-semibold">Terms of Service</span>{" "}and{" "}
+                  <span className="text-primary hover:text-primary/80 font-semibold">Privacy Policy</span>
+                  {/* <Link href="/terms" className="text-primary hover:text-primary/80 font-semibold">
                     Terms of Service
                   </Link>
                   {" "}and{" "}
                   <Link href="/privacy" className="text-primary hover:text-primary/80 font-semibold">
                     Privacy Policy
-                  </Link>
+                  </Link> */}
                 </label>
               </div>
 
