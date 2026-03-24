@@ -362,7 +362,7 @@ export default function RegisterPage() {
                 />
                 <label className="text-sm text-foreground/70">
                   I agree to the{" "} <span className="text-primary hover:text-primary/80 font-semibold">Terms of Service</span>{" "}and{" "}
-                  <span className="text-primary hover:text-primary/80 font-semibold">Privacy Policy</span>
+                  <span className="text-primary hover:text-primary/80 font-semibold">Privacy Policy.</span>
                   {/* <Link href="/terms" className="text-primary hover:text-primary/80 font-semibold">
                     Terms of Service
                   </Link>
