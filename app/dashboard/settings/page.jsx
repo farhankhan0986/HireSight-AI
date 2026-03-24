@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { toast } from "sonner";
 const ResumeViewer = dynamic(() => import("@/app/components/ResumeViewer"), { ssr: false });
 
 export default function SettingsPage() {
@@ -553,9 +554,9 @@ function ResumeUpload({ currentResume, onUploaded }) {
     if (res.ok) {
       await onUploaded();
       setFile(null);
-      alert("Resume uploaded successfully! ✅");
+      toast.success("Resume uploaded successfully!");
     } else {
-      alert("Resume upload failed. Please try again.");
+      toast.error("Resume upload failed. Please try again.");
     }
 
     setLoading(false);

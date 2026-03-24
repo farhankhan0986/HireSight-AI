@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import { toast } from "sonner";
 const ResumeViewer = dynamic(() => import("@/app/components/ResumeViewer"), { ssr: false });
 
 export default function RecruiterApplicationsPage() {
@@ -23,12 +24,14 @@ export default function RecruiterApplicationsPage() {
 
         if (!res.ok) {
           setError("Failed to load applications");
+          toast.error("Failed to load applications");
           return;
         }
 
         setApplications(data);
       } catch {
         setError("Something went wrong");
+        toast.error("Something went wrong");
       } finally {
         setLoading(false);
       }
@@ -51,6 +54,7 @@ export default function RecruiterApplicationsPage() {
       ));
     } catch (err) {
       console.error("Failed to update status:", err);
+      toast.error("Failed to update status");
     }
   };
 
@@ -70,7 +74,7 @@ export default function RecruiterApplicationsPage() {
       });
       const data = await res.json();
       if (res.ok) {
-        alert(data.message || "Successfully ranked candidates.");
+        toast.success(data.message || "Successfully ranked candidates.");
         // Refresh apps
         const fetchApplications = async () => {
           try {
@@ -87,10 +91,10 @@ export default function RecruiterApplicationsPage() {
         };
         fetchApplications();
       } else {
-        alert(data.error || "Failed to rank candidates.");
+        toast.error(data.error || "Failed to rank candidates.");
       }
     } catch (err) {
-      alert("Something went wrong");
+      toast.error("Something went wrong");
     }
   };
 

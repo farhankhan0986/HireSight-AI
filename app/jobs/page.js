@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 export default function JobsPage() {
   const [jobs, setJobs] = useState([]);
@@ -29,7 +30,10 @@ export default function JobsPage() {
       });
       const data = await res.json();
       if (data.loggedIn) setUser(data);
-    } catch { }
+    } catch {
+      toast.error("Failed to load user");
+      setLoggedIn(false);
+    }
   };
 
   const checkAuth = async () => {
@@ -58,6 +62,7 @@ export default function JobsPage() {
 
       if (!res.ok) {
         setError("Failed to load jobs");
+        toast.error("Failed to load jobs");
         return;
       }
 
@@ -65,6 +70,7 @@ export default function JobsPage() {
       setTotalPages(data.totalPages);
     } catch {
       setError("Something went wrong");
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -86,9 +92,9 @@ export default function JobsPage() {
     const data = await res.json();
 
     if (!res.ok) {
-      alert(data.error);
+      toast.error(data.error);
     } else {
-      alert("Application submitted successfully! 🎉");
+      toast.success("Application submitted successfully! 🎉");
     }
   };
 

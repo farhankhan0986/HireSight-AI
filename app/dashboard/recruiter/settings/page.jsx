@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export default function RecruiterSettingsPage() {
   const [user, setUser] = useState(null);
@@ -45,6 +46,7 @@ export default function RecruiterSettingsPage() {
         });
       } catch (err) {
         console.error("Settings load error:", err);
+        toast.error("Failed to load settings");
       } finally {
         setLoading(false);
       }

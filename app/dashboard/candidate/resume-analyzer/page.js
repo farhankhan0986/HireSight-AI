@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 const JOB_DOMAINS = [
   "Frontend Developer",
@@ -48,6 +49,7 @@ export default function ResumeAnalyzerPage() {
       }
     } catch (err) {
       console.error("Failed to fetch profile", err);
+      toast.error("Failed to fetch profile");
     }
   };
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 export default function PostJobPage() {
   const router = useRouter();
@@ -47,13 +48,16 @@ export default function PostJobPage() {
 
       if (!res.ok) {
         setError(data.error || "Failed to post job");
+        toast.error(data.error || "Failed to post job");
         setLoading(false);
         return;
       }
 
+      toast.success("Job posted successfully!");
       router.push("/dashboard/recruiter?posted=true");
     } catch (err) {
       setError("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
       setLoading(false);
     }
   };

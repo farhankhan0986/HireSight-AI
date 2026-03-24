@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState, use as useReact } from "react";
+import { toast } from "sonner";
 
 export default function JobDetailsPage({ params }) {
   // ✅ unwrap params promise (future-proof)
@@ -20,12 +21,14 @@ export default function JobDetailsPage({ params }) {
 
         if (!res.ok) {
           setError(data.error || "Failed to load job");
+          toast.error(data.error || "Failed to load job");
           return;
         }
 
         setJob(data);
       } catch {
         setError("Something went wrong");
+        toast.error("Something went wrong");
       } finally {
         setLoading(false);
       }
@@ -55,10 +58,12 @@ export default function JobDetailsPage({ params }) {
 
     if (!res.ok) {
       setApplyMsg(data.error || "Failed to apply");
+      toast.error(data.error || "Failed to apply");
       return;
     }
 
     setApplyMsg("Application submitted successfully!");
+    toast.success("Application submitted successfully!");
     setEmail("");
   };
 

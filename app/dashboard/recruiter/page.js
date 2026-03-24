@@ -4,6 +4,7 @@ import { useEffect, useState} from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import dynamic from "next/dynamic";
 const ResumeViewer = dynamic(() => import("@/app/components/ResumeViewer"), { ssr: false });
 
@@ -55,6 +56,7 @@ export default function RecruiterDashboard() {
         recalcStats(jobsData.jobs || [], appsData || []);
       } catch (err) {
         console.error("Recruiter dashboard error:", err);
+        toast.error("Failed to load dashboard");
       } finally {
         setLoading(false);
       }
@@ -98,16 +100,16 @@ export default function RecruiterDashboard() {
       });
       const data = await res.json();
       if (res.ok) {
-        alert(data.message || "Successfully ranked candidates.");
+        toast.success(data.message || "Successfully ranked candidates.");
         // Refresh apps
         const appsRes = await fetch("/api/applications", { credentials: "include" });
         const appsData = await appsRes.json();
         setApplications(appsData || []);
       } else {
-        alert(data.error || "Failed to rank candidates.");
+        toast.error(data.error || "Failed to rank candidates.");
       }
     } catch (err) {
-      alert("Something went wrong");
+      toast.error("Something went wrong");
     } finally {
       setRankingJob(null);
     }

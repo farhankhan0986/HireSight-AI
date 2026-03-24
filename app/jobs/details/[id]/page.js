@@ -2,6 +2,7 @@
 import { useEffect, useState, use as useReact, use } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 export default function JobDetailsPage({ params }) {
   const { id } = useReact(params);
@@ -15,7 +16,7 @@ export default function JobDetailsPage({ params }) {
   const [url, setUrl] = useState("");
 
   useEffect(() => {
-    if(typeof window !== "undefined"){
+    if (typeof window !== "undefined") {
       setUrl(window.location.href);
     }
   }, []);
@@ -28,7 +29,7 @@ export default function JobDetailsPage({ params }) {
         });
         const data = await res.json();
         if (data.loggedIn) setUser(data);
-      } catch {}
+      } catch { }
     };
 
     loadUser();
@@ -42,12 +43,14 @@ export default function JobDetailsPage({ params }) {
 
         if (!res.ok) {
           setError(data.error || "Failed to load job");
+          toast.error(data.error || "Failed to load job");
           return;
         }
 
         setJob(data);
       } catch {
         setError("Something went wrong");
+        toast.error("Something went wrong");
       } finally {
         setLoading(false);
       }
@@ -72,12 +75,15 @@ export default function JobDetailsPage({ params }) {
 
       if (!res.ok) {
         setApplyMsg(data.error || "Failed to apply");
+        toast.error(data.error || "Failed to apply");
         return;
       }
 
       setApplyMsg("Application submitted successfully! 🎉");
+      toast.success("Application submitted successfully! 🎉");
     } catch {
       setApplyMsg("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setApplying(false);
     }
@@ -302,73 +308,72 @@ export default function JobDetailsPage({ params }) {
 
               {/* Apply Button */}
               {user?.role !== "recruiter" && (
-  <>
-    {!user ? (
-      <Link
-        href="/login"
-        className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold hover:shadow-lg hover:shadow-primary/25 transition-all mb-3"
-      >
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-        </svg>
-        Login to Apply
-      </Link>
+                <>
+                  {!user ? (
+                    <Link
+                      href="/login"
+                      className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold hover:shadow-lg hover:shadow-primary/25 transition-all mb-3"
+                    >
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                      </svg>
+                      Login to Apply
+                    </Link>
 
-    ) : !user.resume ? (
-      <Link
-        href="/dashboard/settings"
-        className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-yellow-500 text-primary-foreground font-bold hover:bg-yellow-600 transition-all mb-3"
-      >
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-        </svg>
-        Upload Resume First
-      </Link>
+                  ) : !user.resume ? (
+                    <Link
+                      href="/dashboard/settings"
+                      className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-yellow-500 text-primary-foreground font-bold hover:bg-yellow-600 transition-all mb-3"
+                    >
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                      </svg>
+                      Upload Resume First
+                    </Link>
 
-    ) : (
-      <button
-        onClick={handleApply}
-        disabled={applying}
-        className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold hover:shadow-lg hover:shadow-primary/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed mb-3"
-      >
-        {applying ? (
-          <>
-            <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-            </svg>
-            Applying...
-          </>
-        ) : (
-          <>
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Apply Now
-          </>
-        )}
-      </button>
-    )}
-  </>
-)}
+                  ) : (
+                    <button
+                      onClick={handleApply}
+                      disabled={applying}
+                      className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-bold hover:shadow-lg hover:shadow-primary/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed mb-3"
+                    >
+                      {applying ? (
+                        <>
+                          <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          </svg>
+                          Applying...
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          Apply Now
+                        </>
+                      )}
+                    </button>
+                  )}
+                </>
+              )}
 
               {/* Application Message */}
               {applyMsg && (
-                <div className={`p-3 rounded-lg text-sm ${
-                  applyMsg.includes('success') 
-                    ? 'bg-green-500/10 text-green-600 border border-green-500/20' 
+                <div className={`p-3 rounded-lg text-sm ${applyMsg.includes('success')
+                    ? 'bg-green-500/10 text-green-600 border border-green-500/20'
                     : 'bg-red-500/10 text-red-600 border border-red-500/20'
-                }`}>
+                  }`}>
                   {applyMsg}
                 </div>
               )}
 
               {/* Share Button */}
               <button onClick={() => {
-    navigator.clipboard.writeText(url);
-    window.alert("URL copied to clipboard!");
-  }}
-              className="w-full flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg border-2 border-border hover:border-primary/30 hover:bg-foreground/5 transition-all text-sm font-semibold">
+                navigator.clipboard.writeText(url);
+                toast.success("URL copied to clipboard!");
+              }}
+                className="w-full flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg border-2 border-border hover:border-primary/30 hover:bg-foreground/5 transition-all text-sm font-semibold">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                 </svg>
@@ -393,9 +398,9 @@ export default function JobDetailsPage({ params }) {
             </div>
 
             {/* Report */}
-            <button 
-            onClick={()=>window.alert("Job reported successfully!")}
-            className="w-full text-sm text-foreground/60 hover:text-red-500 transition-colors flex items-center justify-center gap-2">
+            <button
+              onClick={() => toast.success("Job reported successfully!")}
+              className="w-full text-sm text-foreground/60 hover:text-red-500 transition-colors flex items-center justify-center gap-2">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
               </svg>
