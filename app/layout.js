@@ -2,6 +2,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import { ThemeProvider } from "./components/theme-provider";
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
   title: "HireSight AI",
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
             {children}
           </main>
           <Toaster />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
