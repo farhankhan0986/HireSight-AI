@@ -29,7 +29,6 @@ export default function ResumeAnalyzerPage() {
   const [error, setError] = useState("");
   const [uploadedResumeUrl, setUploadedResumeUrl] = useState(null);
 
-  // Clear analysis when domain changes for public flow (no caching)
   useEffect(() => {
     setAnalysis(null);
     setError("");
