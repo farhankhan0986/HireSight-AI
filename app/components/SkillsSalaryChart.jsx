@@ -33,13 +33,11 @@ const fadeUp = {
 export default function SkillsSalaryChart() {
   return (
     <section className="relative w-full max-w-7xl mx-auto mt-24 px-4 md:px-6 py-16">
-      {/* Background decorations */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
       </div>
 
-      {/* Header Section */}
       <div className="text-center mb-12">
         <motion.div
           initial="hidden"
@@ -78,7 +76,6 @@ export default function SkillsSalaryChart() {
         </motion.p>
       </div>
 
-      {/* Main Chart Card */}
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -87,15 +84,12 @@ export default function SkillsSalaryChart() {
         custom={2}
         className="relative"
       >
-        {/* Glow effect */}
         <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent rounded-3xl blur-2xl opacity-60" />
         
         <div className="relative bg-card/80 backdrop-blur-xl border border-border/50 rounded-2xl p-6 md:p-8 shadow-2xl overflow-hidden">
-          {/* Decorative elements */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
           
           <div className="relative">
-            {/* Chart Header */}
             <div className="flex items-center justify-between mb-6 pb-4 border-b border-border/50">
               <div>
                 <h3 className="text-base font-bold text-foreground mb-1">Average Compensation by Skill</h3>
@@ -107,7 +101,6 @@ export default function SkillsSalaryChart() {
               </div>
             </div>
 
-            {/* Chart */}
             <div className="relative">
               <ResponsiveContainer width="100%" height={400}>
                 <BarChart 
@@ -174,7 +167,6 @@ export default function SkillsSalaryChart() {
               </ResponsiveContainer>
             </div>
 
-            {/* Skill Tags Below Chart */}
             <div className="mt-6 pt-6 border-t border-border/50">
               <div className="flex flex-wrap items-center justify-center gap-3">
                 {data.map((item, i) => (
@@ -200,7 +192,6 @@ export default function SkillsSalaryChart() {
         </div>
       </motion.div>
 
-      {/* Stats Grid */}
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -260,7 +251,6 @@ export default function SkillsSalaryChart() {
         ))}
       </motion.div>
 
-      {/* Bottom Note */}
       <motion.div
         initial="hidden"
         whileInView="visible"

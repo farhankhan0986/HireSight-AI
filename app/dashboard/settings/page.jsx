@@ -13,7 +13,6 @@ export default function SettingsPage() {
   const [initialized, setInitialized] = useState(false);
   const [saving, setSaving] = useState(false);
   
-  // Form states
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -31,7 +30,6 @@ export default function SettingsPage() {
     const data = await res.json();
     if (data.loggedIn) {
       setUser(data);
-      // Initialize form data with user data
       setFormData({
         name: data.name || "",
         phone: data.phone || "",
