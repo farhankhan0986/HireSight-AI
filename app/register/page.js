@@ -397,8 +397,7 @@ export default function RegisterPage() {
                 )}
               </button>
             </form>
-
-            {/* Footer */}
+            
             <div className="mt-8 text-center">
               <p className="text-sm text-foreground/60">
                 Already have an account?{" "}

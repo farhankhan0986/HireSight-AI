@@ -49,11 +49,8 @@ export async function POST(req) {
        return NextResponse.json({ error: "Failed to extract readable text from your resume. Ensure it is a standard text PDF." }, { status: 400 });
     }
 
-    // 3. Analyze against Domain using Groq
     const analysis = await scoreCandidateForDomain(resumeText, domain);
 
-    // 4. Save to User Document
-    // Initialize map if missing
     if (!user.domain_scores) {
       user.domain_scores = new Map();
     }
